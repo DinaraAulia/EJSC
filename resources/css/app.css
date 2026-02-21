@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+    /* EJSC Color Palette */
+    --color-ejsc-darkest: #01031C;
+    --color-ejsc-dark: #020636;
+    --color-ejsc-navy: #123B7A;
+    --color-ejsc-blue: #71A2CF;
+    --color-ejsc-yellow: #F7AD12;
+    --color-ejsc-orange: #E3733D;
+}
+
+@layer base {
+    body {
+        background-color: var(--color-ejsc-darkest);
+        color: white;
+        font-family: var(--font-sans);
+    }
+}
+
+@layer components {
+    .btn-yellow {
+        @apply bg-[#F7AD12] text-[#01031C] font-semibold px-4 py-2 rounded-full text-sm hover:brightness-110 transition-all;
+    }
+    .btn-outline {
+        @apply border border-[#71A2CF] text-[#71A2CF] font-semibold px-4 py-2 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all;
+    }
+    .card-glass {
+        @apply bg-[#020636] border border-[#123B7A]/40 rounded-2xl;
+    }
+    .section-title {
+        @apply text-3xl font-bold text-white text-center;
+        font-family: var(--font-heading);
+    }
+    .nav-link {
+        @apply text-gray-300 hover:text-[#F7AD12] text-sm font-medium transition-colors;
+    }
+}
