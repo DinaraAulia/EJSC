@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'EJSC Co-working Space – Elevate Your Workspace')
-@section('description', 'EJSC - Co-working space modern dengan fasilitas lengkap. Book ruangan favoritmu sekarang.')
+@section('title', 'EJSC Bakorwil III Malang')
+@section('description', 'EJSC - Co-working space Bakorwil III Malang')
 
 @section('content')
 
     @include('sections.hero-section')
 
-    @include('sections.info-cards-section')
-
     @include('sections.partners-section')
+
+    @include('sections.about-us-section')
 
     @include('sections.workspace-section')
 
