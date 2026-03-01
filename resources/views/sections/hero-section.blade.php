@@ -15,7 +15,7 @@
             <div class="relative z-10">
                 <div class="inline-flex items-center gap-2 bg-[#123B7A]/30 border border-[#123B7A]/40 rounded-full px-3 py-1.5 mb-5">
                     <span class="w-2 h-2 bg-[#F7AD12] rounded-full animate-pulse"></span>
-                    <span class="text-xs text-[#71A2CF] font-medium">Co-working Space Terbaik</span>
+                    <span class="text-xs text-[#71A2CF] font-medium">Best Co-working Space</span>
                 </div>
 
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight mb-4"
@@ -34,18 +34,18 @@
                 </h1>
 
                 <p class="text-gray-400 text-sm leading-relaxed max-w-md mb-5">
-                    Temukan ruang kerja ideal yang mendorong produktivitas. Bergabunglah bersama lebih dari
-                    <span class="text-white font-semibold">1.150 profesional</span> setiap bulannya.
+                    Find the ideal workspace that boosts productivity. Join more than
+                    <span class="text-white font-semibold">1,150 professionals</span> every month.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-4">
                     <a href="{{ route('peminjaman.create') }}"
                        class="bg-[#F7AD12] text-[#01031C] font-semibold px-6 py-3 rounded-full text-sm hover:brightness-110 transition-all shadow-lg shadow-[#F7AD12]/20">
-                        Book Sekarang
+                        Book Now
                     </a>
                     <a href="{{ route('ruangan.index') }}"
                        class="border border-[#71A2CF] text-[#71A2CF] font-semibold px-6 py-3 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all">
-                        Lihat Ruangan
+                        View Rooms
                     </a>
                 </div>
             </div>
@@ -94,8 +94,8 @@
                               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>
                 </div>
-                <p class="text-gray-400 text-xs mb-1">Status Hari Ini</p>
-                <p class="text-white font-bold text-lg leading-tight">Today We Are<br>Open</p>
+                <p class="text-gray-400 text-xs mb-1">Today's Status</p>
+                <p class="text-white font-bold text-lg leading-tight">We Are Open</p>
                 <p class="text-[#71A2CF] text-xs mt-2">08:00 - 15:00 WIB</p>
             </div>
 
@@ -120,7 +120,7 @@
                 </div>
                 @empty
                 <p class="text-gray-400 text-xs leading-relaxed">
-                    Belum ada agenda terjadwal. Silahkan cek kembali nanti.
+                    No scheduled agenda yet. Please check back later.
                 </p>
                 <div class="mt-3 flex items-center justify-between">
                     <span class="text-[#E3733D] text-xs font-medium">Upcoming Event</span>
@@ -130,7 +130,7 @@
 
                 <a href="{{ route('agenda.index') }}"
                    class="mt-3 text-xs text-[#71A2CF] hover:text-[#F7AD12] transition-colors inline-flex items-center gap-1">
-                    Lihat semua
+                    View All
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                     </svg>
@@ -161,20 +161,13 @@
                 </div>
 
                 {{-- Mini stats --}}
-                <div class="grid grid-cols-3 gap-2">
-                    <div class="bg-[#123B7A]/30 rounded-lg p-2 text-center">
-                        <svg class="w-4 h-4 text-[#F7AD12] mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        <p class="text-white text-xs font-bold">Growth</p>
-                    </div>
+                <div class="grid grid-cols-2 gap-2">
                     <div class="bg-[#F7AD12]/10 rounded-lg p-2 text-center">
-                        <p class="text-[#F7AD12] text-xl font-black leading-none">25</p>
+                        <p class="text-[#F7AD12] text-l font-black leading-none">25</p>
                         <p class="text-gray-400 text-xs">Today</p>
                     </div>
                     <div class="bg-[#E3733D]/10 rounded-lg p-2 text-center">
-                        <p class="text-[#E3733D] text-xs font-bold leading-tight">13–01<br>2026</p>
+                        <p class="text-[#E3733D] text-xs font-bold leading-tight">{{ now()->format('d M Y') }}</p>
                         <p class="text-gray-400 text-xs">Date</p>
                     </div>
                 </div>
