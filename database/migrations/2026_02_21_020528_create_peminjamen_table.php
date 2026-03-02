@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('peminjamans', function (Blueprint $table) {
             $table->string('id_peminjaman', 100)->primary();
+            $table->string('ruangan_id', 100)->nullable();
             $table->string('nama_kegiatan', 100)->nullable();
             $table->string('latar_belakang', 100)->nullable();
             $table->string('tujuan_kegiatan', 100)->nullable();

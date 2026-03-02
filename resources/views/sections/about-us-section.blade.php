@@ -8,7 +8,7 @@
                 Get to Know <br/>
                 <span class="text-[#F7AD12]">EJSC Bakorwil III Malang</span>
             </h3>
-            <p class="text-gray-300 leading-relaxed text-sm md:text-base text-justify">
+            <p class="text-gray-400 leading-relaxed text-sm md:text-base text-justify">
                 The East Java Super Corridor (EJSC) is a service provider for the Provincial Government and Vertical institutions (Government Super Corridor) and serves as an open collaboration platform for communities and MSMEs to connect and collaborate (Community Super Corridor) for the people of Malang and its surroundings.
             </p>
             <div class="pt-6 border-t border-[#123B7A]/30">
@@ -82,7 +82,7 @@
                             Co-Working <br/>
                             <span class="text-[#71A2CF]">Space</span>
                         </h3>
-                        <p class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
+                        <p class="text-gray-400 text-xs sm:text-sm mb-6 leading-relaxed">
                             Co-Working Space is primarily used for workspaces, webinars, workshops, and other training activities.
                         </p>
                         <div class="inline-flex mt-auto">

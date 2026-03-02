@@ -18,4 +18,13 @@ class RuanganController extends Controller
         $ruangan = Ruangan::with('fasilitas')->findOrFail($id);
         return view('ruangan.show', compact('ruangan'));
     }
+
+    public function workspaceShow(string $slug)
+    {
+        $ruangan = Ruangan::with(['fasilitas', 'peminjamans' => function($q) {
+            $q->orderBy('tgl_penggunaan', 'desc')->orderBy('jam_mulai', 'desc');
+        }])->where('id_ruangan', $slug)->firstOrFail();
+
+        return view('pages.workspace', compact('ruangan'));
+    }
 }

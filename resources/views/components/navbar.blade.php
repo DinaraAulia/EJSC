@@ -40,10 +40,10 @@
                 Agenda
             </a>
 
-            <a href="{{ route('peminjaman.create') }}"
+            {{-- <a href="{{ route('peminjaman.create') }}"
                class="bg-[#F7AD12] text-[#01031C] font-semibold px-5 py-2 rounded-full text-l hover:brightness-110 transition-all shadow-lg shadow-[#F7AD12]/20">
                 Book Now
-            </a>
+            </a> --}}
         </div>
 
         {{-- Right Icons --}}
@@ -106,12 +106,12 @@
        class="flex items-center gap-2 text-gray-300 hover:text-white text-sm py-2.5 px-3 rounded-xl hover:bg-white/5 transition-colors">
         Agenda
     </a>
-    <div class="pt-2">
+    {{-- <div class="pt-2">
         <a href="{{ route('peminjaman.create') }}"
            class="block text-center bg-[#F7AD12] text-[#01031C] font-semibold px-5 py-2.5 rounded-full text-sm hover:brightness-110 transition-all">
             Book Now
         </a>
-    </div>
+    </div> --}}
 </div>
 
 @push('scripts')

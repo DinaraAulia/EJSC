@@ -13,7 +13,7 @@
 
     @include('sections.workspace-section')
 
-    @include('sections.our-space-section')
+    @include('sections.gallery-section')
 
     @include('sections.testimoni-section')
 

@@ -14,6 +14,7 @@ Route::get('/', [LandingController::class, 'index'])->name('home');
 // Ruangan
 Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
 Route::get('/ruangan/{id}', [RuanganController::class, 'show'])->name('ruangan.show');
+Route::get('/workspace/{slug}', [RuanganController::class, 'workspaceShow'])->name('workspace.show');
 
 // Fasilitas
 Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');

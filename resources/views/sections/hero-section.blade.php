@@ -45,7 +45,7 @@
                     </a>
                     <a href="{{ route('ruangan.index') }}"
                        class="border border-[#71A2CF] text-[#71A2CF] font-semibold px-6 py-3 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all">
-                        View Rooms
+                        Visitor Form
                     </a>
                 </div>
             </div>
