@@ -6,7 +6,7 @@
         <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-[#F7AD12]/5 rounded-full blur-3xl"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 pt-22 md:max-w-7xl px-6 pt-15">
+    <div class="max-w-7xl mx-auto px-4 pt-22 sm:max-w-7xl px-6 pt-15">
 
         {{-- === HERO CONTENT === --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[55vh]">
@@ -18,7 +18,7 @@
                     <span class="text-xs text-[#71A2CF] font-medium">Best Co-working Space</span>
                 </div>
 
-                <h1 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight mb-4"
+                <h1 class="text-4xl md:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight mb-4"
                     style="font-family: 'Poppins', sans-serif;">
                     ELEVATE YOUR
                     <span class="block text-white">WORKSPACE</span>
@@ -43,7 +43,7 @@
                        class="bg-[#F7AD12] text-[#01031C] font-semibold px-6 py-3 rounded-full text-sm hover:brightness-110 transition-all shadow-lg shadow-[#F7AD12]/20">
                         Book Now
                     </a>
-                    <a href="{{ route('ruangan.index') }}"
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSetuLm4-WwV6AMJEVmrjxPdE5XUeJOwdezKrS6XDHY1FrwDDw/viewform?fbzx=-7150895403706703302"
                        class="border border-[#71A2CF] text-[#71A2CF] font-semibold px-6 py-3 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all">
                         Visitor Form
                     </a>

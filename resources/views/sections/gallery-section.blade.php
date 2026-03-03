@@ -1,8 +1,4 @@
-{{--
-    SECTION: Our Space (Gallery)
-    Variables yang diharapkan: $galeris (Collection<Galeri> with fotos)
---}}
-<section class="py-8 bg-[#020636]/20">
+<section id="gallery" class="py-8 bg-[#020636]/20">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
 
 @push('styles')
@@ -65,7 +61,7 @@
         <div class="flex items-end justify-between mb-1 md:mb-6"></div>
              <div class="w-full text-center">
                 <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">GALLERY</p>
-                <h2 class="text-2xl md:text-4xl font-black text-white" style="font-family: 'Poppins', sans-serif;">
+                <h2 class="text-3xl md:text-3xl font-black text-white" style="font-family: 'Poppins', sans-serif;">
                     My Visual Diary
                 </h2>
                 <p class="text-gray-400 mt-2 text-sm max-w-lg mx-auto">

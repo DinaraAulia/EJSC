@@ -2,11 +2,11 @@
     SECTION: Testimoni
     Variables yang diharapkan: $testimonis (Collection<Testimoni>)
 --}}
-<section class="py-16 max-w-7xl mx-auto px-4 md:px-6">
+<section id="review" class="py-16 max-w-7xl mx-auto px-4 md:px-6">
 
     <div class="mb-10 text-center">
-        <p class="text-[#71A2CF] text-xs uppercase tracking-widest mb-2">Review</p>
-        <h2 class="text-2xl md:text-3xl font-black text-white" style="font-family: 'Poppins', sans-serif;">
+        <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">Review</p>
+        <h2 class="text-3xl md:text-3xl font-black text-white" style="font-family: 'Poppins', sans-serif;">
             What They Say
         </h2>
     </div>

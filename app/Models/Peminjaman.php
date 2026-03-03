@@ -37,9 +37,9 @@ class Peminjaman extends Model
 
     protected $casts = [
         'tgl_penggunaan' => 'date',
-        'jam_mulai'      => 'datetime',
-        'jam_berakhir'   => 'datetime',
+        // 'jam_mulai' and 'jam_berakhir' are handled as strings (time)
         'status'         => 'boolean',
+        'fasilitas_tambahan' => 'array',
     ];
 
     /**

@@ -1,9 +1,9 @@
-<section class="py-16 max-w-7xl mx-auto px-4 md:px-6">
+<section id="workspace" class="py-16 max-w-7xl mx-auto px-4 md:px-6">
     {{-- Header --}}
     <div class="flex items-end justify-between mb-10">
         <div>
             <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">Space Options</p>
-            <h2 class="text-2xl md:text-4xl font-black text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
+            <h2 class="text-3xl md:text-2xl font-black text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
                 Explore <span class="text-[#F7AD12]">Space</span>
             </h2>
         </div>

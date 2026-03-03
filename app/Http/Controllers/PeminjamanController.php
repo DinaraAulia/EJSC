@@ -28,15 +28,19 @@ class PeminjamanController extends Controller
             'instansi'          => 'nullable|string|max:100',
             'alamat_instansi'   => 'nullable|string|max:100',
             'wilayah'           => 'nullable|string|max:100',
-            'no_hp_pj'          => 'required|integer',
-            'fasilitas_tambahan'=> 'nullable|string|max:100',
+            'no_hp_pj'          => 'required|string',
+            'fasilitas_tambahan'=> 'nullable|array',
             'tgl_penggunaan'    => 'required|date',
             'jam_mulai'         => 'required',
             'jam_berakhir'      => 'required',
-            'berkas_ktp'        => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'berkas_surat'      => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'berkas_poster'     => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'berkas_ktp'        => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
+            'berkas_surat'      => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
+            'berkas_poster'     => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
         ]);
+
+        if (isset($validated['fasilitas_tambahan'])) {
+            $validated['fasilitas_tambahan'] = json_encode($validated['fasilitas_tambahan']);
+        }
 
         // Handle file uploads
         foreach (['berkas_ktp', 'berkas_surat', 'berkas_poster'] as $file) {
