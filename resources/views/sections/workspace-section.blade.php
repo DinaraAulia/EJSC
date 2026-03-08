@@ -3,8 +3,8 @@
     <div class="flex items-end justify-between mb-10">
         <div>
             <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">Space Options</p>
-            <h2 class="text-3xl md:text-2xl font-black text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
-                Explore <span class="text-[#F7AD12]">Space</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
+                Explore <span class="opacity-50">Space</span>
             </h2>
         </div>
     </div>

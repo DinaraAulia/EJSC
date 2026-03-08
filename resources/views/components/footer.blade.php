@@ -38,6 +38,7 @@
                             <li><a href="{{ url('/#workspace') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Workspace</a></li>
                             <li><a href="{{ url('/#gallery') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Gallery</a></li>
                             <li><a href="{{ url('/#review') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Review</a></li>
+                            <li><a href="{{ url('/#team') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Team</a></li>
                         </ul>
                     </div>
                     <div>

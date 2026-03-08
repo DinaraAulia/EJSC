@@ -4,9 +4,9 @@
         {{-- Left Column: About EJSC --}}
         <div class="lg:col-span-5 space-y-6">
             <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">About Us</p>
-            <h3 class="text-3xl md:text-3xl font-black text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
+            <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
                 Get to Know <br/>
-                <span class="text-[#F7AD12]">EJSC Bakorwil III Malang</span>
+                <span class="opacity-50">EJSC Bakorwil III Malang</span>
             </h3>
             <p class="text-gray-400 leading-relaxed text-sm md:text-base text-justify">
                 The East Java Super Corridor (EJSC) is a service provider for the Provincial Government and Vertical institutions (Government Super Corridor) and serves as an open collaboration platform for communities and MSMEs to connect and collaborate (Community Super Corridor) for the people of Malang and its surroundings.
@@ -78,7 +78,7 @@
 
                     {{-- Left side of Card: Title & Description --}}
                     <div class="md:w-1/2 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/10 pb-6 md:pb-0 md:pr-6">
-                        <h3 class="text-3xl md:text-2xl font-black text-white mb-3 uppercase leading-tight" style="font-family: 'Poppins', sans-serif;">
+                        <h3 class="text-3xl md:text-2xl font-bold text-white mb-3 uppercase leading-tight" style="font-family: 'Poppins', sans-serif;">
                             Co-Working <br/>
                             <span class="text-[#71A2CF]">Space</span>
                         </h3>

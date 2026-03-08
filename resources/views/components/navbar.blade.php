@@ -57,6 +57,11 @@
                class="nav-scroll-link text-l font-medium text-gray-300 hover:text-white transition-colors">
                 Review
             </a>
+
+            <a href="{{ url('/#team') }}"
+               class="nav-scroll-link text-l font-medium text-gray-300 hover:text-white transition-colors">
+                Team
+            </a>
         </div>
 
         {{-- Right Icons --}}
@@ -143,6 +148,10 @@
        class="nav-scroll-link flex items-center gap-2 text-gray-300 hover:text-white text-sm py-2.5 px-3 rounded-xl hover:bg-white/5 transition-colors">
         Review
     </a>
+    <a href="{{ url('/#team') }}"
+       class="nav-scroll-link flex items-center gap-2 text-gray-300 hover:text-white text-sm py-2.5 px-3 rounded-xl hover:bg-white/5 transition-colors">
+        Team
+    </a>
 
     {{-- Social Icons (Mobile) --}}
     <div class="flex items-center justify-center gap-4 pt-4 pb-2 mt-4 border-t border-white/10">
@@ -196,7 +205,7 @@
         function setActiveLink(clickedHref) {
             navLinks.forEach(link => {
                 const currentHref = link.getAttribute('href');
-                
+
                 // Determine if this specific link matches the clicked href
                 if (currentHref === clickedHref) {
                     // Activate styling

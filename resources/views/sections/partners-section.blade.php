@@ -4,8 +4,8 @@
 --}}
 <section class="py-12 border-y border-[#123B7A]/20 bg-[#020636]/30">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 class="text-2xl font-bold text-white text-center mb-8" style="font-family: 'Poppins', sans-serif;">
-            Our Partners
+        <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-8" style="font-family: 'Poppins', sans-serif;">
+            Our <span class="opacity-50">Partners</span>
         </h2>
 
         <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16">

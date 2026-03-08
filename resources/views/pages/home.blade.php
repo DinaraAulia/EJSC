@@ -11,11 +11,15 @@
 
     @include('sections.about-us-section')
 
+    @include('sections.video-section')
+
     @include('sections.workspace-section')
 
     @include('sections.gallery-section')
 
     @include('sections.testimoni-section')
+
+    @include('sections.team-section')
 
     @include('sections.cta-section')
 

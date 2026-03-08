@@ -60,13 +60,13 @@
 
         <div class="flex items-end justify-between mb-1 md:mb-6"></div>
              <div class="w-full text-center">
-                <p class="text-[#71A2CF] text-xs uppercase tracking-widest font-bold mb-2">GALLERY</p>
-                <h2 class="text-3xl md:text-3xl font-black text-white" style="font-family: 'Poppins', sans-serif;">
-                    My Visual Diary
+                <p class="text-[#71A2CF] px-3 py-5 text-xs uppercase tracking-widest font-bold">GALLERY</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white" style="font-family: 'Poppins', sans-serif;">
+                    Highlights of <span class="opacity-50">EJSC</span>
                 </h2>
-                <p class="text-gray-400 mt-2 text-sm max-w-lg mx-auto">
+                {{-- <p class="text-gray-400 mt-2 text-sm max-w-lg mx-auto">
                     See the world through our lens: adventures and events in photos
-                </p>
+                </p> --}}
         </div>
 
         {{-- Swiper Carousel --}}
