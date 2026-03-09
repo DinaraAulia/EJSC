@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Route;
 // Landing Page
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
+// Talenta Space
+Route::view('/talenta', 'pages.talenta')->name('talenta');
+
+// UMKM Space
+Route::view('/umkm', 'pages.umkm')->name('umkm');
+
 // Ruangan
 Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
 Route::get('/ruangan/{id}', [RuanganController::class, 'show'])->name('ruangan.show');

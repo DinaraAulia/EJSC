@@ -15,7 +15,7 @@
         <!-- Header -->
         <div class="mb-10 text-center">
             <span class="inline-block py-1 px-3 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold tracking-wider uppercase mb-4 shadow-[0_0_15px_rgba(59,130,246,0.2)]">Space Booking</span>
-            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">Room Booking <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Form</span></h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">Room Booking <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Form</span></h1>
             <p class="text-gray-400 max-w-2xl mx-auto text-lg">Please fill out the form below to book a workspace for your event or activity.</p>
         </div>
 
@@ -47,17 +47,17 @@
         <!-- Form Card -->
         <div class="bg-[#121827]/80 backdrop-blur-xl border border-gray-800 rounded-3xl p-6 md:p-10 shadow-2xl relative w-full">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-t-3xl"></div>
-            
+
             <form action="{{ route('peminjaman.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 block w-full">
                 @csrf
-                
+
                 <!-- Event Section -->
                 <div>
                     <h2 class="text-xl font-semibold text-white mb-5 flex items-center w-full">
                         <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mr-3 text-sm border border-blue-500/30">1</span>
                         Event Information
                     </h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                         <!-- Event Name -->
                         <div class="md:col-span-2 space-y-2 relative w-full group">
@@ -74,7 +74,7 @@
                                 class="w-full px-4 py-3 bg-[#0a0f1c]/50 border border-gray-700/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500 transition-all duration-300 group-hover:border-gray-600 block pl-4"
                                 placeholder="E.g., Workshop, Seminar, etc.">
                         </div>
-                        
+
                         <!-- Background -->
                         <div class="space-y-2 relative w-full group">
                             <label for="latar_belakang" class="block text-sm font-medium text-gray-300">Event Background <span class="text-red-400">*</span></label>
@@ -98,7 +98,7 @@
                                 class="w-full px-4 py-3 bg-[#0a0f1c]/50 border border-gray-700/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500 transition-all duration-300 group-hover:border-gray-600 block pl-4"
                                 placeholder="Total expected attendees">
                         </div>
-                        
+
                         <!-- Speaker / Narasumber -->
                         <div class="md:col-span-2 space-y-2 relative w-full group">
                             <label for="narasumber" class="block text-sm font-medium text-gray-300">Speaker / Guest Star Name <span class="text-red-400">*</span></label>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="w-full h-px bg-gray-800 my-6 block"></div>
 
                 <!-- Responsibility Section -->
@@ -117,7 +117,7 @@
                         <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mr-3 text-sm border border-blue-500/30">2</span>
                         Representative Info
                     </h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                         <!-- PIC Name -->
                         <div class="space-y-2 relative w-full group">
@@ -142,7 +142,7 @@
                                 class="w-full px-4 py-3 bg-[#0a0f1c]/50 border border-gray-700/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500 transition-all duration-300 group-hover:border-gray-600 block pl-4"
                                 placeholder="Organization name">
                         </div>
-                        
+
                         <!-- Region/City -->
                         <div class="space-y-2 relative w-full group">
                             <label for="wilayah" class="block text-sm font-medium text-gray-300">Region/City <span class="text-red-400">*</span></label>
@@ -184,7 +184,7 @@
                         <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mr-3 text-sm border border-blue-500/30">3</span>
                         Booking Details
                     </h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                         <!-- Select Room -->
                         <div class="space-y-2 relative w-full group">
@@ -269,7 +269,7 @@
                             </label>
                         @endforeach
                     </div>
-                    
+
                     <!-- Other Facility Textbox -->
                     <div class="mt-4 w-full group relative">
                         <label for="other_facility" class="block text-sm font-medium text-gray-400 mb-2">Other Requirements (optional)</label>
@@ -287,7 +287,7 @@
                         <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mr-3 text-sm border border-blue-500/30">4</span>
                         Documents
                     </h2>
-                    
+
                     <div class="space-y-8 w-full">
                         <!-- Upload KTP -->
                         <div class="space-y-3 w-full">
@@ -358,14 +358,14 @@
 
                 <!-- Submit Button -->
                 <div class="pt-6 border-t border-gray-800/50 w-full flex">
-                    <button type="submit" 
+                    <button type="submit"
                         class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#121827] shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 transform hover:-translate-y-1 block ml-auto">
                         Submit Booking Request
                     </button>
                 </div>
             </form>
         </div>
-        
+
         <!-- Info Alert -->
         <div class="mt-8 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-5 text-gray-300 flex items-start gap-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">

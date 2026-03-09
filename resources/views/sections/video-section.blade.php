@@ -20,10 +20,9 @@
         <div class="relative bg-[#020636] rounded-xl md:rounded-xl border border-[#123B7A]/50 overflow-hidden shadow-2xl z-10 p-2 md:p-3">
 
             <div class="relative w-full aspect-video rounded-xl md:rounded-xl overflow-hidden bg-black/50">
-                {{-- Replace 'https://www.youtube.com/embed/...' with your actual EJSC profile video link --}}
                 <iframe
                     class="w-full h-full object-cover"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=abcdefgh"
+                    src="https://www.youtube.com/embed/xHA7RlYVSWk?si=r7YOWZQRPqKPD3_a"
                     title="EJSC Bakorwil Malang Profile Video"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

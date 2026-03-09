@@ -3,7 +3,7 @@
     <div class="mb-10 text-center">
         <p class="text-[#71A2CF] px-3 py-5 text-xs uppercase tracking-widest font-bold">Team</p>
         <h2 class="text-2xl md:text-3xl font-bold text-white" style="font-family: 'Poppins', sans-serif;">
-            Meet The <span class="opacity-50">Team</span>
+            Meet The <span class="opacity-50">Team EJSC</span>
         </h2>
     </div>
 

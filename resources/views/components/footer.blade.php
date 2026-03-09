@@ -36,6 +36,8 @@
                             <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Home</a></li>
                             <li><a href="{{ url('/#about') }}" class="text-gray-400 hover:text-white text-sm transition-colors">About</a></li>
                             <li><a href="{{ url('/#workspace') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Workspace</a></li>
+                            <li><a href="{{ route('talenta') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Talent</a></li>
+                            <li><a href="{{ route('umkm') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Partner SMEs</a></li>
                             <li><a href="{{ url('/#gallery') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Gallery</a></li>
                             <li><a href="{{ url('/#review') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Review</a></li>
                             <li><a href="{{ url('/#team') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Team</a></li>

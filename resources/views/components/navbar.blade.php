@@ -48,6 +48,16 @@
                 </div>
             </div>
 
+            <a href="{{ route('talenta') }}"
+               class="nav-scroll-link text-l font-medium {{ request()->routeIs('talenta') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} transition-colors">
+                Talent
+            </a>
+
+            <a href="{{ route('umkm') }}"
+               class="nav-scroll-link text-l font-medium {{ request()->routeIs('umkm') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} transition-colors">
+                Partner SMEs
+            </a>
+
             <a href="{{ url('/#gallery') }}"
                class="nav-scroll-link text-l font-medium text-gray-300 hover:text-white transition-colors">
                 Gallery
@@ -140,6 +150,14 @@
         </div>
     </div>
 
+    <a href="{{ route('talenta') }}"
+       class="nav-scroll-link flex items-center gap-2 {{ request()->routeIs('talenta') ? 'text-[#F7AD12] bg-white/5 font-semibold' : 'text-gray-300 hover:text-white font-normal hover:bg-white/5' }} text-sm py-2.5 px-3 rounded-xl transition-colors">
+        Talent
+    </a>
+    <a href="{{ route('umkm') }}"
+       class="nav-scroll-link flex items-center gap-2 {{ request()->routeIs('umkm') ? 'text-[#F7AD12] bg-white/5 font-semibold' : 'text-gray-300 hover:text-white font-normal hover:bg-white/5' }} text-sm py-2.5 px-3 rounded-xl transition-colors">
+        Partner SMEs
+    </a>
     <a href="{{ url('/#gallery') }}"
        class="nav-scroll-link flex items-center gap-2 text-gray-300 hover:text-white text-sm py-2.5 px-3 rounded-xl hover:bg-white/5 transition-colors">
         Gallery
