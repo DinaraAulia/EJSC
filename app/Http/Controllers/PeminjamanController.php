@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ruangan;
 use App\Models\Peminjaman;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +31,7 @@ class PeminjamanController extends Controller
             'wilayah'           => 'nullable|string|max:100',
             'no_hp_pj'          => 'required|string',
             'fasilitas_tambahan'=> 'nullable|array',
+            'ruangan_id'        => 'required|string|exists:ruangans,id_ruangan',
             'tgl_penggunaan'    => 'required|date',
             'jam_mulai'         => 'required',
             'jam_berakhir'      => 'required',
@@ -50,7 +51,7 @@ class PeminjamanController extends Controller
         $ktpPath = null;
         $suratPath = null;
         if ($request->hasFile('berkas_poster')) {
-            $gambarPath = $request->file('berkas_poster')->store('ruangan-images', 'public');
+            $gambarPath = $request->file('berkas_poster')->store('peminjaman', 'public');
         }
         if ($request->hasFile('berkas_ktp')) {
             $ktpPath = $request->file('berkas_ktp')->store('peminjaman', 'public');
@@ -69,28 +70,8 @@ class PeminjamanController extends Controller
         if (!empty($facilitiesText)) $longDescParts[] = "Facilities: {$facilitiesText}";
         $deskripsiPanjang = $longDescParts ? implode("\n", $longDescParts) : null;
 
-        // Ensure unique slug for the new Ruangan
-        $namaRuangan = $validated['nama_kegiatan'] ?? 'Unnamed Room';
-        $slugBase = Str::slug($namaRuangan) ?: 'ruangan';
-        $slug = $slugBase;
-        $counter = 1;
-        while (Ruangan::where('slug', $slug)->exists()) {
-            $slug = $slugBase . '-' . $counter++;
-        }
-
-        // Create Ruangan and Peminjaman inside a transaction so both are consistent
-        DB::transaction(function () use ($validated, $namaRuangan, $slug, $deskripsiPanjang, $gambarPath, $ktpPath, $suratPath, $request) {
-            $ruangan = Ruangan::create([
-                'nama_ruangan'     => $namaRuangan,
-                'slug'             => $slug,
-                'deskripsi'        => $validated['tujuan_kegiatan'] ?? $validated['latar_belakang'] ?? null,
-                'kapasitas'        => $validated['jumlah_peserta'] ?? null,
-                'deskripsi_panjang'=> $deskripsiPanjang,
-                'gambar'           => $gambarPath,
-                'is_tersedia'      => false,
-                'tgl_diperbarui'   => now(),
-            ]);
-
+        // Create only Peminjaman (do not create Ruangan)
+        DB::transaction(function () use ($validated, $deskripsiPanjang, $gambarPath, $ktpPath, $suratPath) {
             // Prepare fasilitas as short string (DB column length limited)
             $fasilitasShort = null;
             if (!empty($validated['fasilitas_tambahan'])) {
@@ -102,7 +83,7 @@ class PeminjamanController extends Controller
 
             Peminjaman::create([
                 'id_peminjaman'     => 'PMJ-' . strtoupper(Str::random(8)),
-                'ruangan_id'        => $ruangan->id_ruangan,
+                'ruangan_id'        => $validated['ruangan_id'] ?? null,
                 'nama_kegiatan'     => $validated['nama_kegiatan'] ?? null,
                 'latar_belakang'    => $validated['latar_belakang'] ?? null,
                 'tujuan_kegiatan'   => $validated['tujuan_kegiatan'] ?? null,
