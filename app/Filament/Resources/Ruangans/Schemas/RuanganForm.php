@@ -13,13 +13,13 @@ class RuanganForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\Section::make('Informasi Utama')
+                \Filament\Schemas\Components\Section::make('Informasi Utama')
                     ->schema([
                         TextInput::make('nama_ruangan')
                             ->required()
                             ->maxLength(100)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (\Filament\Forms\Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                            ->afterStateUpdated(fn (\Filament\Schemas\Components\Utilities\Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state))),
                         TextInput::make('slug')
                             ->readOnly()
                             ->dehydrated()
@@ -30,7 +30,7 @@ class RuanganForm
                             ->directory('ruangan-images'),
                     ])->columns(2),
                     
-                \Filament\Forms\Components\Section::make('Detail Ruangan')
+                \Filament\Schemas\Components\Section::make('Detail Ruangan')
                     ->schema([
                         TextInput::make('deskripsi')
                             ->maxLength(100)

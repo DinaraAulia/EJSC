@@ -1,4 +1,7 @@
 {{-- Navbar --}}
+@php
+    $navRuangans = \App\Models\Ruangan::where('is_tersedia', true)->get();
+@endphp
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[#01031C]/90 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
 
@@ -29,22 +32,12 @@
                 </button>
                 <div class="absolute top-full left-0 mt-2 w-52 bg-[#01031C]/90 backdrop-blur-md rounded-xl py-2
                             opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-xl">
-                    <a href="{{ route('workspace.show', 'co-working-space') }}"
+                    @foreach($navRuangans as $ruangan)
+                    <a href="{{ route('workspace.show', $ruangan->slug) }}"
                        class="block px-4 py-2 text-l text-gray-300 hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
-                        Co-Working Space
+                        {{ $ruangan->nama_ruangan }}
                     </a>
-                    <a href="{{ route('workspace.show', 'command-center') }}"
-                       class="block px-4 py-2 text-l text-gray-300 hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
-                        Command Center
-                    </a>
-                    <a href="{{ route('workspace.show', 'meeting-room') }}"
-                       class="block px-4 py-2 text-l text-gray-300 hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
-                        Meeting Room
-                    </a>
-                    <a href="{{ route('workspace.show', 'classroom-playhard') }}"
-                       class="block px-4 py-2 text-l text-gray-300 hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
-                        Classroom / Playhard
-                    </a>
+                    @endforeach
                 </div>
             </div>
 
@@ -147,22 +140,12 @@
     <div class="py-2.5 px-3">
         <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Workspace</p>
         <div class="flex flex-col space-y-1 pl-2 border-l-2 border-[#123B7A]/30">
-            <a href="{{ route('workspace.show', 'co-working-space') }}"
+            @foreach($navRuangans as $ruangan)
+            <a href="{{ route('workspace.show', $ruangan->slug) }}"
                class="text-gray-400 hover:text-white text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                Co-Working Space
+                {{ $ruangan->nama_ruangan }}
             </a>
-            <a href="{{ route('workspace.show', 'command-center') }}"
-               class="text-gray-400 hover:text-white text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                Command Center
-            </a>
-            <a href="{{ route('workspace.show', 'meeting-room') }}"
-               class="text-gray-400 hover:text-white text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                Meeting Room
-            </a>
-            <a href="{{ route('workspace.show', 'classroom-playhard') }}"
-               class="text-gray-400 hover:text-white text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                Classroom / Playhard
-            </a>
+            @endforeach
         </div>
     </div>
 
