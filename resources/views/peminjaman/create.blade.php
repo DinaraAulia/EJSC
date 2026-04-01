@@ -299,11 +299,26 @@
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     <div class="flex flex-col text-sm text-gray-400">
-                                        <label for="berkas_ktp" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
-                                            <span>Upload a file</span>
-                                            <input id="berkas_ktp" name="berkas_ktp" type="file" required class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
-                                        </label>
-                                        <p class="pl-1 mt-1">or drag and drop</p>
+                                            <div id="dropzone-ktp" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                            <label for="berkas_ktp" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
+                                                <span>Upload a file</span>
+                                                <input id="berkas_ktp" name="berkas_ktp" type="file" required class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
+                                            </label>
+                                            <p class="pl-1 mt-1">or drag and drop</p>
+                                            <div id="preview-wrapper" class="hidden mt-4 pt-4 border-t border-gray-200">
+                                                <p class="text-xs text-gray-500 mb-2">Preview Dokumen:</p>
+                                                <img id="img-preview" class="hidden mx-auto max-h-48 rounded shadow-md">
+            
+                                                <div id="pdf-preview-container" class="hidden">
+                                                    <div class="flex items-center justify-center bg-gray-100 p-3 rounded">
+                                                        <svg class="w-8 h-8 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
+                                                        <span id="pdf-name" class="text-gray-700 truncate max-w-xs"></span>
+                                                    </div>
+                                                    <p class="text-[10px] mt-1 text-gray-400 font-italic">*PDF terpilih</p>
+                                                </div>
+                                                <object id="pdf-embed-ktp" class="hidden w-full h-64 mt-3 rounded" type="application/pdf"></object>
+                                            </div>
+                                        </div>
                                     </div>
                                     <p class="text-xs text-gray-500 mt-2 file-name-display">No file chosen</p>
                                 </div>
@@ -320,13 +335,28 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-500 group-hover:text-blue-400 transition-colors" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    <div class="flex flex-col text-sm text-gray-400">
-                                        <label for="berkas_surat" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
-                                            <span>Upload a file</span>
-                                            <input id="berkas_surat" name="berkas_surat" type="file" required class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
-                                        </label>
-                                        <p class="pl-1 mt-1">or drag and drop</p>
-                                    </div>
+                                            <div class="flex flex-col text-sm text-gray-400">
+                                                <label for="berkas_surat" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
+                                                    <span>Upload a file</span>
+                                                    <input id="berkas_surat" name="berkas_surat" type="file" required class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
+                                                </label>
+                                                <p class="pl-1 mt-1">or drag and drop</p>
+
+                                                <div id="dropzone-surat" class="sr-only"></div>
+
+                                                <div id="preview-wrapper-surat" class="hidden mt-4 pt-2 border-t border-gray-200">
+                                                    <p class="text-xs text-gray-500 mb-2">Preview Dokumen:</p>
+                                                    <img id="img-preview-surat" class="hidden mx-auto max-h-48 rounded shadow-md">
+                                                    <div id="pdf-preview-surat" class="hidden">
+                                                        <div class="flex items-center justify-center bg-gray-100 p-3 rounded">
+                                                            <svg class="w-8 h-8 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
+                                                            <span id="pdf-name-surat" class="text-gray-700 truncate max-w-xs"></span>
+                                                        </div>
+                                                        <p class="text-[10px] mt-1 text-gray-400 font-italic">*PDF terpilih</p>
+                                                    </div>
+                                                    <object id="pdf-embed-surat" class="hidden w-full h-64 mt-3 rounded" type="application/pdf"></object>
+                                                </div>
+                                            </div>
                                     <p class="text-xs text-gray-500 mt-2 file-name-display">No file chosen</p>
                                 </div>
                             </div>
@@ -341,13 +371,28 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-500 group-hover:text-blue-400 transition-colors" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    <div class="flex flex-col text-sm text-gray-400">
-                                        <label for="berkas_poster" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
-                                            <span>Upload a file</span>
-                                            <input id="berkas_poster" name="berkas_poster" type="file" class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
-                                        </label>
-                                        <p class="pl-1 mt-1">or drag and drop</p>
-                                    </div>
+                                            <div class="flex flex-col text-sm text-gray-400">
+                                                <label for="berkas_poster" class="relative cursor-pointer rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 w-full block">
+                                                    <span>Upload a file</span>
+                                                    <input id="berkas_poster" name="berkas_poster" type="file" class="sr-only" accept=".jpg,.jpeg,.png,.pdf">
+                                                </label>
+                                                <p class="pl-1 mt-1">or drag and drop</p>
+
+                                                <div id="dropzone-poster" class="sr-only"></div>
+
+                                                <div id="preview-wrapper-poster" class="hidden mt-4 pt-2 border-t border-gray-200">
+                                                    <p class="text-xs text-gray-500 mb-2">Preview Dokumen:</p>
+                                                    <img id="img-preview-poster" class="hidden mx-auto max-h-48 rounded shadow-md">
+                                                    <div id="pdf-preview-poster" class="hidden">
+                                                        <div class="flex items-center justify-center bg-gray-100 p-3 rounded">
+                                                            <svg class="w-8 h-8 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
+                                                            <span id="pdf-name-poster" class="text-gray-700 truncate max-w-xs"></span>
+                                                        </div>
+                                                        <p class="text-[10px] mt-1 text-gray-400 font-italic">*PDF terpilih</p>
+                                                    </div>
+                                                    <object id="pdf-embed-poster" class="hidden w-full h-64 mt-3 rounded" type="application/pdf"></object>
+                                                </div>
+                                            </div>
                                     <p class="text-xs text-gray-500 mt-2 file-name-display">No file chosen</p>
                                 </div>
                             </div>
@@ -380,16 +425,139 @@
 </main>
 
 <script>
-    // Simple script to show selected file name
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        input.addEventListener('change', function(e) {
-            const fileName = e.target.files[0]?.name || 'No file chosen';
-            const display = e.target.closest('div.space-y-1')?.querySelector('.file-name-display');
-            if(display) {
-                display.textContent = fileName;
-                display.classList.add('text-blue-400');
+document.addEventListener('DOMContentLoaded', function() {
+    function updateFileDisplay(input) {
+        if (!input) return;
+        const file = input.files && input.files[0];
+        // Try to find the nearest .file-name-display element
+        let fileDisplay = input.closest('form')?.querySelectorAll('.file-name-display');
+        if (fileDisplay && fileDisplay.length) {
+            // Find the one that is visually closest (simple heuristic)
+            for (const el of fileDisplay) {
+                const parent = el.closest('div');
+                if (parent && parent.contains(input)) {
+                    el.innerText = file ? file.name : 'No file chosen';
+                    return;
+                }
+            }
+            // fallback: update first
+            fileDisplay[0].innerText = file ? file.name : 'No file chosen';
+        }
+    }
+
+    // KTP input uses existing preview markup (img-preview, pdf-preview-container, pdf-name, preview-wrapper)
+    const ktpInput = document.getElementById('berkas_ktp');
+    if (ktpInput) {
+        ktpInput.addEventListener('change', function(event) {
+            const file = event.target.files && event.target.files[0];
+            const previewWrapper = document.getElementById('preview-wrapper');
+            const imgPreview = document.getElementById('img-preview');
+            const pdfPreview = document.getElementById('pdf-preview-container');
+            const pdfName = document.getElementById('pdf-name');
+            const pdfEmbed = document.getElementById('pdf-embed-ktp');
+
+            if (previewWrapper) previewWrapper.classList.add('hidden');
+            if (imgPreview) imgPreview.classList.add('hidden');
+            if (pdfPreview) pdfPreview.classList.add('hidden');
+
+            updateFileDisplay(ktpInput);
+
+            if (file) {
+                const fileType = file.type || '';
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (previewWrapper) previewWrapper.classList.remove('hidden');
+                    if (fileType.startsWith('image/') && imgPreview) {
+                        imgPreview.src = e.target.result;
+                        imgPreview.classList.remove('hidden');
+                        if (pdfEmbed) pdfEmbed.classList.add('hidden');
+                    } else if (fileType === 'application/pdf' && pdfPreview && pdfName) {
+                        pdfName.innerText = file.name;
+                        pdfPreview.classList.remove('hidden');
+                        if (pdfEmbed) {
+                            pdfEmbed.data = e.target.result;
+                            pdfEmbed.classList.remove('hidden');
+                        }
+                    }
+                };
+                reader.readAsDataURL(file);
             }
         });
+    }
+
+    // Generic handlers for surat and poster: show filename, image/pdf preview, and drag-and-drop
+    ['berkas_surat', 'berkas_poster'].forEach(function(id) {
+        const input = document.getElementById(id);
+        if (!input) return;
+        input.addEventListener('change', function(e) {
+            const file = e.target.files && e.target.files[0];
+            updateFileDisplay(input);
+
+            const isPoster = id === 'berkas_poster';
+            const imgPreview = document.getElementById(isPoster ? 'img-preview-poster' : 'img-preview-surat');
+            const pdfPreview = document.getElementById(isPoster ? 'pdf-preview-poster' : 'pdf-preview-surat');
+            const pdfName = document.getElementById(isPoster ? 'pdf-name-poster' : 'pdf-name-surat');
+            const previewWrapper = document.getElementById(isPoster ? 'preview-wrapper-poster' : 'preview-wrapper-surat');
+            const pdfEmbed = document.getElementById(isPoster ? 'pdf-embed-poster' : 'pdf-embed-surat');
+
+            if (previewWrapper) previewWrapper.classList.add('hidden');
+            if (imgPreview) imgPreview.classList.add('hidden');
+            if (pdfPreview) pdfPreview.classList.add('hidden');
+
+            if (file) {
+                const fileType = file.type || '';
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    if (previewWrapper) previewWrapper.classList.remove('hidden');
+                    if (fileType.startsWith('image/') && imgPreview) {
+                        imgPreview.src = ev.target.result;
+                        imgPreview.classList.remove('hidden');
+                    } else if (fileType === 'application/pdf' && pdfPreview && pdfName) {
+                        pdfName.innerText = file.name;
+                        pdfPreview.classList.remove('hidden');
+                        if (pdfEmbed) {
+                            pdfEmbed.data = ev.target.result;
+                            pdfEmbed.classList.remove('hidden');
+                        }
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Setup drag & drop for this input
+        const dropzoneId = id === 'berkas_poster' ? 'dropzone-poster' : 'dropzone-surat';
+        const dropzone = document.getElementById(dropzoneId);
+        const visibleDropzone = dropzone || input.closest('.mt-1');
+        if (visibleDropzone) {
+            ['dragenter', 'dragover'].forEach(evt => visibleDropzone.addEventListener(evt, function(ev) {
+                ev.preventDefault(); ev.stopPropagation();
+                visibleDropzone.classList?.add('ring-2', 'ring-blue-400');
+            }));
+            ['dragleave', 'drop'].forEach(evt => visibleDropzone.addEventListener(evt, function(ev) {
+                ev.preventDefault(); ev.stopPropagation();
+                visibleDropzone.classList?.remove('ring-2', 'ring-blue-400');
+            }));
+            visibleDropzone.addEventListener('drop', function(ev) {
+                ev.preventDefault(); ev.stopPropagation();
+                const files = ev.dataTransfer && ev.dataTransfer.files;
+                if (files && files.length) {
+                    // set files to input
+                    try {
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(files[0]);
+                        input.files = dataTransfer.files;
+                        // trigger change handler
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    } catch (err) {
+                        // fallback: just call handler with first file
+                        const file = files[0];
+                        updateFileDisplay(input);
+                    }
+                }
+            });
+        }
     });
+});
 </script>
 @endsection
