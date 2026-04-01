@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class PeminjamenTable
@@ -15,48 +16,70 @@ class PeminjamenTable
     {
         return $table
             ->columns([
-                TextColumn::make('booking_id')
+                TextColumn::make('id_peminjaman')
+                    ->label('Booking ID')
                     ->searchable(),
-                TextColumn::make('room_id')
+                TextColumn::make('ruangan.nama_ruangan')
+                    ->label('Room')
                     ->searchable(),
-                TextColumn::make('event_name')
+                TextColumn::make('nama_kegiatan')
+                    ->label('Event Name')
                     ->searchable(),
-                TextColumn::make('event_background')
+                TextColumn::make('latar_belakang')
+                    ->label('Event Background')
                     ->searchable(),
-                TextColumn::make('event_objective')
+                TextColumn::make('tujuan_kegiatan')
+                    ->label('Event Objective')
                     ->searchable(),
-                TextColumn::make('target_participants')
+                TextColumn::make('sasaran_peserta')
+                    ->label('Target Participants')
                     ->searchable(),
-                TextColumn::make('number_of_participants')
+                TextColumn::make('jumlah_peserta')
+                    ->label('Number of Participants')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('speaker')
+                TextColumn::make('narasumber')
+                    ->label('Speaker')
                     ->searchable(),
-                TextColumn::make('PIC_name')
+                TextColumn::make('pj_kegiatan')
+                    ->label('PIC Name')
                     ->searchable(),
-                TextColumn::make('institution')
+                TextColumn::make('instansi')
+                    ->label('Institution')
                     ->searchable(),
-                TextColumn::make('institution_address')
+                TextColumn::make('alamat_instansi')
+                    ->label('Institution address')
                     ->searchable(),
-                TextColumn::make('region')
+                TextColumn::make('wilayah')
+                    ->label('Region')
                     ->searchable(),
-                TextColumn::make('PIC_phone')
+                TextColumn::make('no_hp_pj')
+                    ->label('P i c phone')
                     ->searchable(),
-                TextColumn::make('date_of_use')
+                TextColumn::make('tgl_penggunaan')
+                    ->label('Date of use')
                     ->date()
                     ->sortable(),
-                TextColumn::make('start_time')
-                    ->time()
+                TextColumn::make('jam_mulai')
+                    ->label('Start time')
                     ->sortable(),
-                TextColumn::make('end_time')
-                    ->time()
+                TextColumn::make('jam_berakhir')
+                    ->label('End time')
                     ->sortable(),
                 TextColumn::make('berkas_ktp')
-                    ->searchable(),
+                    ->label('KTP')
+                    ->url(fn ($record) => $record->berkas_ktp ? asset('storage/' . $record->berkas_ktp) : null)
+                    ->openUrlInNewTab(),
                 TextColumn::make('berkas_surat')
-                    ->searchable(),
-                TextColumn::make('berkas_poster')
-                    ->searchable(),
+                    ->label('Surat')
+                    ->url(fn ($record) => $record->berkas_surat ? asset('storage/' . $record->berkas_surat) : null)
+                    ->openUrlInNewTab(),
+                ImageColumn::make('berkas_poster')
+                    ->label('Poster')
+                    ->disk('public')
+                    ->height(80)
+                    ->width(120)
+                    ->toggleable(isToggledHiddenByDefault: false),
                 IconColumn::make('status')
                     ->boolean(),
                 TextColumn::make('created_at')
