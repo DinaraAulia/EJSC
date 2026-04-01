@@ -15,18 +15,23 @@ class RuangansTable
     {
         return $table
             ->columns([
-                TextColumn::make('room_id')
+                \Filament\Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Thumbnail'),
+                TextColumn::make('id_ruangan')
                     ->searchable(),
-                TextColumn::make('room_name')
+                TextColumn::make('nama_ruangan')
                     ->searchable(),
-                TextColumn::make('description')
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('deskripsi')
                     ->searchable(),
-                TextColumn::make('capacity')
+                TextColumn::make('kapasitas')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('is_available')
+                IconColumn::make('is_tersedia')
                     ->boolean(),
-                TextColumn::make('date_updated')
+                TextColumn::make('tgl_diperbarui')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

@@ -18,12 +18,14 @@ class LandingController extends Controller
         $galeris   = Galeri::with('fotos')->latest()->take(8)->get();
         $partners  = Partner::all();
         $testimonis = Testimoni::where('is_published', true)->take(3)->get();
+        $ruangans  = \App\Models\Ruangan::where('is_tersedia', true)->get();
 
         return view('pages.home', compact(
             'agendas',
             'galeris',
             'partners',
-            'testimonis'
+            'testimonis',
+            'ruangans'
         ));
     }
 }
