@@ -29,7 +29,7 @@ class AgendasTable
                     ->label('Agenda Details'),
                 TextColumn::make('berkas')
                     ->label('Files')
-                    ->formatStateUsing(fn ($state) => $state ? 'Lihat Berkas' : 'Tidak ada file')
+                    ->formatStateUsing(fn ($state) => $state ? 'View File' : 'No file')
                     ->url(fn ($record) => $record->berkas ? asset('storage/' . $record->berkas) : null)
                     ->openUrlInNewTab()
                     ->color('primary'),

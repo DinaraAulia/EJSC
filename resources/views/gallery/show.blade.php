@@ -37,7 +37,7 @@
 
                 <div class="w-full md:w-36 bg-[#020636]/50 rounded-2xl p-4 border border-white/5 text-left md:text-right shrink-0">
                     <p class="text-gray-400 text-xs mb-1">Total Dokumentasi</p>
-                    <p class="text-[#123B7A] text-xl md:text-2xl font-bold">{{ $galeri->fotos->count() }} <span class="text-sm font-medium text-gray-300">Foto</span></p>
+                    <p class="text-[#123B7A] text-xl md:text-2xl font-bold">{{ count($galeri->album_fotos ?? []) }} <span class="text-sm font-medium text-gray-300">Foto</span></p>
                 </div>
             </header>
 
@@ -59,13 +59,13 @@
 
         {{-- Photos Masonry Style Grid --}}
         <div class="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-            @forelse($galeri->fotos as $index => $foto)
+            @forelse($galeri->album_fotos ?? [] as $index => $path)
                 @php
-                    $isExternal = \Illuminate\Support\Str::startsWith($foto->path_foto, 'http');
-                    $imgSrc = $isExternal ? $foto->path_foto : asset('storage/' . $foto->path_foto);
+                    $isExternal = \Illuminate\Support\Str::startsWith($path, 'http');
+                    $imgSrc = $isExternal ? $path : asset('storage/' . $path);
                 @endphp
                 <div class="relative group rounded-xl overflow-hidden cursor-zoom-in break-inside-avoid border border-white/5 bg-[#020636] shadow-xl" onclick="openLightbox('{{ $imgSrc }}')">
-                    <img src="{{ $imgSrc }}" alt="Dokumentasi {{ $galeri->judul }} ke-{{ $index+1 }}" loading="lazy" class="w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                    <img src="{{ $imgSrc }}" alt="Dokumentasi {{ $galeri->judul }}" loading="lazy" class="w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#01031C]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
                         <span class="text-white/90 font-medium text-sm border-b border-[#F7AD12] pb-0.5 pointer-events-none">Perbesar Gambar</span>
                     </div>

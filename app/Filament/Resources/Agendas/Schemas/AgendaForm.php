@@ -14,17 +14,20 @@ class AgendaForm
         return $schema
             ->components([
                 TextInput::make('nama_agenda')
+                    ->label('Agenda Name')
                     ->required()
                     ->maxLength(100)
                     ->default(null),
                 DatePicker::make('tanggal')
+                    ->label('Date')
                     ->required(),
                 TextInput::make('detail_agenda')
+                    ->label('Agenda Details')
                     ->maxLength(100)
                     ->default(null),
                 FileUpload::make('berkas')
+                    ->label('File (PNG/PDF)')
                     ->acceptedFileTypes(['application/pdf'])
-                    ->image()
                     ->directory('agenda-files')
                     ->openable()
                     ->downloadable()
