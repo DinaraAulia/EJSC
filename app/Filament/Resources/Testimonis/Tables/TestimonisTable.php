@@ -15,19 +15,26 @@ class TestimonisTable
     {
         return $table
             ->columns([
-                TextColumn::make('review_id')
-                    ->searchable(),
-                TextColumn::make('reviewer')
-                    ->searchable(),
+                TextColumn::make('id_testimoni')
+                    ->searchable()
+                    ->label('Review ID'),
+                TextColumn::make('nama_pengulas')
+                    ->searchable()
+                    ->label('Reviewer Name'),
                 TextColumn::make('rating')
-                    ->searchable(),
-                TextColumn::make('review_details')
-                    ->searchable(),
-                TextColumn::make('review_date')
+                    ->searchable()
+                    ->label('Rating'),
+                TextColumn::make('detail_ulasan')
+                    ->searchable()
+                    ->limit(50)
+                    ->label('Review Details'),
+                TextColumn::make('tgl_ulasan')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Review Date'),
                 IconColumn::make('is_published')
-                    ->boolean(),
+                    ->boolean()
+                    ->label('Is Published'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
