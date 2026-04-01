@@ -95,7 +95,7 @@
                                     @foreach($dayAgendas as $agenda)
                                         <div class="text-left w-full truncate">
                                             {{-- Event Badge --}}
-                                            <div onclick="openAgendaModal({{ json_encode($agenda->nama_agenda) }}, {{ json_encode($agenda->detail_agenda ?? 'Deskripsi tidak tersedia') }}, '{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d F Y') }}')" class="inline-block w-full px-1.5 py-1 rounded-md bg-gradient-to-r from-blue-900/40 to-transparent border-l-2 border-cyan-400 group-hover:from-blue-800/60 transition-colors cursor-pointer" title="{{ $agenda->nama_agenda }}">
+                                            <div onclick="openAgendaModal({{ json_encode($agenda->nama_agenda) }}, {{ json_encode($agenda->detail_agenda ?? 'Deskripsi tidak tersedia') }}, '{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d F Y') }}', '{{ $agenda->berkas ? asset('storage/' . $agenda->berkas) : '' }}')" class="inline-block w-full px-1.5 py-1 rounded-md bg-gradient-to-r from-blue-900/40 to-transparent border-l-2 border-cyan-400 group-hover:from-blue-800/60 transition-colors cursor-pointer" title="{{ $agenda->nama_agenda }}">
                                                 <p class="text-[9px] md:text-[10px] font-semibold text-cyan-50 truncate leading-tight">{{ $agenda->nama_agenda }}</p>
                                             </div>
                                         </div>
@@ -128,9 +128,18 @@
 
                 <p id="modal-date" class="text-[#F7AD12] text-xs font-bold uppercase tracking-wider mb-2">DATE</p>
                 <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-white mb-4 leading-tight" style="font-family: 'Poppins', sans-serif;">Event Title</h3>
-                
+
                 <div class="bg-white/5 border border-white/5 rounded-xl p-4">
-                    <p id="modal-desc" class="text-sm text-gray-300 leading-relaxed">Event Description</p>
+                    <p id="modal-desc" class="text-sm text-gray-300 leading-relaxed mb-4">Event Description</p>
+                    
+                    {{-- Tambahkan Container Berkas --}}
+                    <div id="berkas-container" class="hidden border-t border-white/10 pt-4 mt-2">
+                        <p class="text-[10px] text-gray-500 uppercase font-bold mb-2">Lampiran Berkas</p>
+                        <a id="modal-berkas-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border border-cyan-500/40 rounded-lg text-cyan-400 text-xs hover:bg-cyan-500/30 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Lihat/Download Berkas
+                        </a>
+                    </div>
                 </div>
 
                 <div class="mt-8 flex justify-end">
@@ -145,17 +154,25 @@
     const modal = document.getElementById('agenda-modal');
     const modalContent = document.getElementById('agenda-modal-content');
     
-    function openAgendaModal(title, desc, date) {
+    function openAgendaModal(title, desc, date, berkasUrl) {
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-desc').innerText = desc;
         document.getElementById('modal-date').innerText = date;
-        
-        // Show modal
+
+        const berkasContainer = document.getElementById('berkas-container');
+        const berkasLink = document.getElementById('modal-berkas-link');
+
+        if (berkasUrl && berkasUrl.trim() !== "") {
+            berkasContainer.classList.remove('hidden');
+            berkasLink.href = berkasUrl;
+        } else {
+            berkasContainer.classList.add('hidden');
+        }
+
+        // Tampilkan modal (logika yang sudah ada)
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modalContent.classList.remove('scale-95');
         modalContent.classList.add('scale-100');
-        
-        // Prevent body scroll
         document.body.style.overflow = 'hidden';
     }
 

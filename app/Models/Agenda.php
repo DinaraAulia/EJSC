@@ -22,4 +22,15 @@ class Agenda extends Model
     protected $casts = [
         'tanggal' => 'date',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->id_agenda)) {
+                // Contoh format: AGD-20260401-XXXX
+                $model->id_agenda = 'AGD-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(2)));
+            }
+        });
+    }
 }

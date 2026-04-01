@@ -14,17 +14,25 @@ class AgendasTable
     {
         return $table
             ->columns([
-                TextColumn::make('agenda_id')
-                    ->searchable(),
-                TextColumn::make('agenda_name')
-                    ->searchable(),
-                TextColumn::make('date')
+                TextColumn::make('id_agenda')
+                    ->searchable()
+                    ->label('Agenda ID'),
+                TextColumn::make('nama_agenda')
+                    ->searchable()
+                    ->label('Agenda Name'),
+                TextColumn::make('tanggal')
                     ->date()
-                    ->sortable(),
-                TextColumn::make('agenda_details')
-                    ->searchable(),
-                TextColumn::make('files')
-                    ->searchable(),
+                    ->sortable()
+                    ->label('Date'),
+                TextColumn::make('detail_agenda')
+                    ->searchable()
+                    ->label('Agenda Details'),
+                TextColumn::make('berkas')
+                    ->label('Files')
+                    ->formatStateUsing(fn ($state) => $state ? 'Lihat Berkas' : 'Tidak ada file')
+                    ->url(fn ($record) => $record->berkas ? asset('storage/' . $record->berkas) : null)
+                    ->openUrlInNewTab()
+                    ->color('primary'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
