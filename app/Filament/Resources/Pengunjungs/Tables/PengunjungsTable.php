@@ -14,14 +14,14 @@ class PengunjungsTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_pengunjung')
+                TextColumn::make('visitor_id')
                     ->searchable(),
-                TextColumn::make('nama')
+                TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('usia')
+                TextColumn::make('age')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('jenis_kelamin')
+                TextColumn::make('gender')
                     ->searchable(),
                 TextColumn::make('no_hp')
                     ->searchable(),

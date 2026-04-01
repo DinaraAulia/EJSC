@@ -14,14 +14,14 @@ class GalerisTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_galeri')
+                TextColumn::make('gallery_id')
                     ->searchable(),
-                TextColumn::make('judul')
+                TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('tanggal')
+                TextColumn::make('date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('deskripsi')
+                TextColumn::make('description')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

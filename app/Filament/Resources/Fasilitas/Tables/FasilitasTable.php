@@ -15,15 +15,15 @@ class FasilitasTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_fasilitas')
+                TextColumn::make('facility_id')
                     ->searchable(),
-                TextColumn::make('nama_fasilitas')
+                TextColumn::make('facility_name')
                     ->searchable(),
-                TextColumn::make('ikon')
+                TextColumn::make('icon')
                     ->searchable(),
-                IconColumn::make('is_tersedia')
+                IconColumn::make('is_available')
                     ->boolean(),
-                TextColumn::make('tgl_diperbarui')
+                TextColumn::make('date_updated')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

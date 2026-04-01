@@ -14,11 +14,11 @@ class GaleriFotosTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_gambar')
+                TextColumn::make('photo_id')
                     ->searchable(),
-                TextColumn::make('galeri_id')
+                TextColumn::make('gallery_id')
                     ->searchable(),
-                TextColumn::make('path_foto')
+                TextColumn::make('photo_path')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

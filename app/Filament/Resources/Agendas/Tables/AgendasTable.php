@@ -14,16 +14,16 @@ class AgendasTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_agenda')
+                TextColumn::make('agenda_id')
                     ->searchable(),
-                TextColumn::make('nama_agenda')
+                TextColumn::make('agenda_name')
                     ->searchable(),
-                TextColumn::make('tanggal')
+                TextColumn::make('date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('detail_agenda')
+                TextColumn::make('agenda_details')
                     ->searchable(),
-                TextColumn::make('berkas')
+                TextColumn::make('files')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

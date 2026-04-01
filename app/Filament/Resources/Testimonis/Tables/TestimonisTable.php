@@ -15,15 +15,15 @@ class TestimonisTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_testimoni')
+                TextColumn::make('review_id')
                     ->searchable(),
-                TextColumn::make('nama_pengulas')
+                TextColumn::make('reviewer')
                     ->searchable(),
                 TextColumn::make('rating')
                     ->searchable(),
-                TextColumn::make('detail_ulasan')
+                TextColumn::make('review_details')
                     ->searchable(),
-                TextColumn::make('tgl_ulasan')
+                TextColumn::make('review_date')
                     ->date()
                     ->sortable(),
                 IconColumn::make('is_published')

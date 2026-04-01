@@ -15,40 +15,40 @@ class PeminjamenTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_peminjaman')
+                TextColumn::make('booking_id')
                     ->searchable(),
-                TextColumn::make('ruangan_id')
+                TextColumn::make('room_id')
                     ->searchable(),
-                TextColumn::make('nama_kegiatan')
+                TextColumn::make('event_name')
                     ->searchable(),
-                TextColumn::make('latar_belakang')
+                TextColumn::make('event_background')
                     ->searchable(),
-                TextColumn::make('tujuan_kegiatan')
+                TextColumn::make('event_objective')
                     ->searchable(),
-                TextColumn::make('sasaran_peserta')
+                TextColumn::make('target_participants')
                     ->searchable(),
-                TextColumn::make('jumlah_peserta')
+                TextColumn::make('number_of_participants')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('narasumber')
+                TextColumn::make('speaker')
                     ->searchable(),
-                TextColumn::make('pj_kegiatan')
+                TextColumn::make('PIC_name')
                     ->searchable(),
-                TextColumn::make('instansi')
+                TextColumn::make('institution')
                     ->searchable(),
-                TextColumn::make('alamat_instansi')
+                TextColumn::make('institution_address')
                     ->searchable(),
-                TextColumn::make('wilayah')
+                TextColumn::make('region')
                     ->searchable(),
-                TextColumn::make('no_hp_pj')
+                TextColumn::make('PIC_phone')
                     ->searchable(),
-                TextColumn::make('tgl_penggunaan')
+                TextColumn::make('date_of_use')
                     ->date()
                     ->sortable(),
-                TextColumn::make('jam_mulai')
+                TextColumn::make('start_time')
                     ->time()
                     ->sortable(),
-                TextColumn::make('jam_berakhir')
+                TextColumn::make('end_time')
                     ->time()
                     ->sortable(),
                 TextColumn::make('berkas_ktp')

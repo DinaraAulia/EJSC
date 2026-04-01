@@ -14,15 +14,15 @@ class PartnersTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_partner')
+                TextColumn::make('partner_id')
                     ->searchable(),
-                TextColumn::make('nama_mitra')
+                TextColumn::make('partner_name')
                     ->searchable(),
                 TextColumn::make('logo')
                     ->searchable(),
-                TextColumn::make('detail_mitra')
+                TextColumn::make('partner_details')
                     ->searchable(),
-                TextColumn::make('berkas_kerjasama')
+                TextColumn::make('partner_file')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
