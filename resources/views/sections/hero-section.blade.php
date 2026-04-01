@@ -85,10 +85,20 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 relative z-10">
 
             {{-- Card 1: Status Hari Ini --}}
+            @php
+                $now = \Carbon\Carbon::now('Asia/Jakarta');
+                $isOpen = $now->isWeekday() && $now->hour >= 8 && $now->hour < 16;
+            @endphp
             <div class="bg-[#020636] border border-[#123B7A]/40 rounded-2xl p-5 relative overflow-hidden">
                 <div class="absolute top-3 right-3 flex gap-1.5">
-                    <span class="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded-full">Mo-Fr</span>
-                    <span class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-2 py-0.5 rounded-full">Open</span>
+                    <span class="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded-full">{{ $now->translatedFormat('D, d M') }}</span>
+                    @if($isOpen)
+                        <span class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Open
+                        </span>
+                    @else
+                        <span class="bg-red-500/80 text-white text-xs font-bold px-2 py-0.5 rounded-full">Closed</span>
+                    @endif
                 </div>
                 <div class="w-10 h-10 bg-[#123B7A]/40 rounded-xl flex items-center justify-center mb-4">
                     <svg class="w-5 h-5 text-[#71A2CF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,8 +107,10 @@
                     </svg>
                 </div>
                 <p class="text-gray-400 text-xs mb-1">Today's Status</p>
-                <p class="text-white font-bold text-lg leading-tight">We Are Open</p>
-                <p class="text-[#71A2CF] text-xs mt-2">08:00 - 15:00 WIB</p>
+                <p class="font-bold text-lg leading-tight {{ $isOpen ? 'text-white' : 'text-red-400' }}">
+                    {{ $isOpen ? 'We Are Open' : 'We Are Closed' }}
+                </p>
+                <p class="text-[#71A2CF] text-xs mt-2">08:00 - 16:00 WIB</p>
             </div>
 
             {{-- Card 2: Plan of Meeting / Agenda --}}

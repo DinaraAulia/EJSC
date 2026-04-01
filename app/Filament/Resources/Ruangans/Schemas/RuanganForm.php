@@ -13,46 +13,53 @@ class RuanganForm
     {
         return $schema
             ->components([
-                \Filament\Schemas\Components\Section::make('Informasi Utama')
+                \Filament\Schemas\Components\Section::make('Main Information')
                     ->schema([
                         TextInput::make('nama_ruangan')
+                            ->label('Room Name')
                             ->required()
                             ->maxLength(100)
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn (\Filament\Schemas\Components\Utilities\Set $set, ?string $state) => $set('slug', \Illuminate\Support\Str::slug($state))),
                         TextInput::make('slug')
+                            ->label('Slug')
                             ->readOnly()
                             ->dehydrated()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
                         \Filament\Forms\Components\FileUpload::make('gambar')
+                            ->label('Image')
                             ->image()
                             ->directory('ruangan-images'),
                     ])->columns(2),
                     
-                \Filament\Schemas\Components\Section::make('Detail Ruangan')
+                \Filament\Schemas\Components\Section::make('Room Details')
                     ->schema([
                         TextInput::make('deskripsi')
+                            ->label('Short Description')
                             ->maxLength(100)
                             ->default(null),
                         TextInput::make('kapasitas')
+                            ->label('Capacity (Seats)')
                             ->numeric()
                             ->default(null),
                         TextInput::make('wifi_speed')
-                            ->label('Kecepatan Wi-Fi')
+                            ->label('Wi-Fi Speed')
                             ->placeholder('e.g. 50 Mbps')
                             ->maxLength(50),
                         TextInput::make('luas')
-                            ->label('Luas Ruangan (m²)')
+                            ->label('Room Area (m²)')
                             ->numeric()
                             ->placeholder('e.g. 80'),
                         \Filament\Forms\Components\RichEditor::make('deskripsi_panjang')
-                            ->label('Deskripsi Lengkap Ruangan')
+                            ->label('Full Room Description')
                             ->columnSpanFull(),
                         Toggle::make('is_tersedia')
+                            ->label('Is Available')
                             ->required()
                             ->default(true),
                         DatePicker::make('tgl_diperbarui')
+                            ->label('Date Updated')
                             ->default(now()),
                     ])->columns(2),
             ]);
