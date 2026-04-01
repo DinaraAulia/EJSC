@@ -68,7 +68,7 @@
 
         {{-- Search & Info Header --}}
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-transparent backdrop-blur-sm p-4 rounded-xl border border-white/10">
-            <p class="text-gray-400 text-sm">Showing <span class="text-[#71A2CF] font-bold">12</span> of <span class="text-[#71A2CF] font-bold">1060</span> Data</p>
+            <p class="text-gray-400 text-sm">Showing <span class="text-[#71A2CF] font-bold">{{ $talentas->firstItem() ?? 0 }}</span> to <span class="text-[#71A2CF] font-bold">{{ $talentas->lastItem() ?? 0 }}</span> of <span class="text-[#71A2CF] font-bold">{{ $talentas->total() }}</span> Talents</p>
 
             <div class="relative w-full md:w-64">
                 <input type="text" placeholder="Search..."
@@ -84,71 +84,60 @@
         {{-- Talent Grid --}}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
 
-            {{-- Array of mockup talent data matching the reference --}}
-            @php
-                $mockTalents = [
-                    ['name' => 'Fauzi Rahman', 'portfolio' => 30, 'city' => 'Pamekasan'],
-                    ['name' => 'Muchammad Syahrial Akbar', 'portfolio' => 30, 'city' => 'Malang'],
-                    ['name' => 'Edwinda Mardiana', 'portfolio' => 29, 'city' => 'Malang'],
-                    ['name' => 'Hermawan', 'portfolio' => 27, 'city' => 'Pasuruan'],
-                    ['name' => 'Ilman Hendrawan Saputra', 'portfolio' => 24, 'city' => 'Kediri'],
-                    ['name' => 'Moh. Syamsul Arifin', 'portfolio' => 24, 'city' => 'Pamekasan'],
-                    ['name' => 'Fatony Akbar', 'portfolio' => 23, 'city' => 'Malang'],
-                    ['name' => 'Deby Anggara Pratama', 'portfolio' => 23, 'city' => 'Malang'],
-                    ['name' => 'Ichsan As\'hari', 'portfolio' => 19, 'city' => 'Sidoarjo'],
-                    ['name' => 'Imam Ariadi', 'portfolio' => 19, 'city' => 'Lamongan'],
-                    ['name' => 'Rifaldi Saputra', 'portfolio' => 18, 'city' => 'Jember'],
-                    ['name' => 'Ahmad Adib', 'portfolio' => 17, 'city' => 'Pamekasan'],
-                ];
-            @endphp
-
-            @foreach($mockTalents as $talent)
-            <div class="bg-transparent backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:bg-white/5 transition-colors group">
+            @forelse($talentas as $talent)
+            <div class="bg-[#101524]/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:bg-white/5 hover:border-blue-500/50 transition-all duration-300 group shadow-lg">
                 {{-- Avatar --}}
-                <div class="w-20 h-20 rounded-full bg-[#d9d9d9] flex justify-center items-center overflow-hidden mb-5 shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300">
-                    {{-- Default placeholder icon matching reference --}}
-                    <svg class="w-12 h-12 text-[#999999] mt-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#123B7A] to-blue-900/50 flex justify-center items-center overflow-hidden mb-5 shrink-0 border-2 border-white/5 group-hover:border-blue-400/30 transition-all duration-500 relative">
+                    @if($talent->avatar)
+                        @php
+                            $isExternal = \Illuminate\Support\Str::startsWith($talent->avatar, ['http://', 'https://']);
+                            $avatarSrc = $isExternal ? $talent->avatar : asset('storage/' . $talent->avatar);
+                        @endphp
+                        <img src="{{ $avatarSrc }}" class="w-full h-full object-cover">
+                    @else
+                        {{-- Default placeholder icon matching reference --}}
+                        <svg class="w-12 h-12 text-white/20 mt-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    @endif
                 </div>
 
                 {{-- Details --}}
-                <div class="flex-grow flex flex-col items-center justify-between w-full h-[120px]">
+                <div class="flex-grow flex flex-col items-center justify-between w-full min-h-[140px]">
                     <div class="w-full">
-                        <h3 class="text-white font-bold text-sm md:text-[15px] leading-tight mb-2 line-clamp-2" style="font-family: 'Inter', sans-serif;">
-                            {{ $talent['name'] }}
+                        <h3 class="text-white font-bold text-sm md:text-base leading-tight mb-3 line-clamp-2" style="font-family: 'Poppins', sans-serif;">
+                            {{ $talent->name }}
                         </h3>
-                        <div class="inline-flex bg-[#3b1c1c] rounded-full px-2.5 py-0.5">
-                            <span class="text-[#fca5a5] text-[10px] font-medium">{{ $talent['portfolio'] }} Portfolios</span>
+                        
+                        @if($talent->portfolio)
+                        <a href="{{ asset('storage/' . $talent->portfolio) }}" target="_blank" class="inline-flex items-center gap-2 bg-blue-600/20 hover:bg-blue-600/40 text-blue-300 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-500/30 transition-colors uppercase tracking-wider mb-2">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            View Portfolio (PDF)
+                        </a>
+                        @else
+                        <div class="inline-flex bg-white/5 text-gray-500 text-[10px] font-medium px-3 py-1 rounded-full border border-white/5">
+                            No Portfolio
                         </div>
+                        @endif
                     </div>
 
-                    <div class="w-full mt-auto pt-3">
-                        <p class="text-gray-500 text-xs mb-0.5">Domicile</p>
-                        <p class="text-white font-bold text-sm">{{ $talent['city'] }}</p>
+                    <div class="w-full mt-auto pt-4 border-t border-white/5">
+                        <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-1">Domicile</p>
+                        <p class="text-gray-200 font-bold text-sm">{{ $talent->city }}</p>
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-span-full py-20 text-center bg-white/5 rounded-3xl border border-white/10">
+                <p class="text-gray-400">No talents found. Be the first to join!</p>
+            </div>
+            @endforelse
 
         </div>
 
-        {{-- Pagination Mockup --}}
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 bg-transparent backdrop-blur-sm p-4 rounded-xl border border-white/10">
-            <p class="text-gray-500 text-sm">Page 1 of 140</p>
-            <div class="flex items-center gap-1.5 font-medium text-xs">
-                {{-- Prev button --}}
-                <button class="px-3 py-1.5 rounded-lg text-gray-500 cursor-not-allowed">Prev</button>
-
-                <button class="w-8 h-8 rounded-lg bg-[#71A2CF] text-black font-bold flex items-center justify-center">1</button>
-                <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center">2</button>
-                <span class="w-8 h-8 rounded-lg text-gray-500 flex items-center justify-center">...</span>
-                <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center">139</button>
-                <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center">140</button>
-
-                {{-- Next button --}}
-                <button class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Next</button>
-            </div>
+        {{-- Laravel Real Pagination --}}
+        <div class="mt-12 flex justify-center">
+            {{ $talentas->links() }}
         </div>
 
     </section>

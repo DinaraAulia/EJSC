@@ -68,7 +68,7 @@
 
         {{-- Search & Info Header --}}
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-transparent backdrop-blur-sm p-4 rounded-xl border border-white/10">
-            <p class="text-gray-400 text-sm">Showing <span class="text-[#F7AD12] font-bold">12</span> of <span class="text-[#F7AD12] font-bold">320</span> SMEs</p>
+            <p class="text-gray-400 text-sm">Showing <span class="text-[#F7AD12] font-bold">{{ $umkms->firstItem() ?? 0 }}</span> to <span class="text-[#F7AD12] font-bold">{{ $umkms->lastItem() ?? 0 }}</span> of <span class="text-[#F7AD12] font-bold">{{ $umkms->total() }}</span> Partner SMEs</p>
 
             <div class="relative w-full md:w-64">
                 <input type="text" placeholder="Search..."
@@ -84,69 +84,51 @@
         {{-- UMKM Grid --}}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
 
-            {{-- Array of mockup UMKM data --}}
-            @php
-                $mockUMKMs = [
-                    ['name' => 'Keripik Tempe Rohani', 'category' => 'Food & Beverage', 'city' => 'Malang'],
-                    ['name' => 'Kopi Robusta Dampit', 'category' => 'Coffee Roastery', 'city' => 'Malang'],
-                    ['name' => 'Batik Tulis Celaket', 'category' => 'Fashion & Kriya', 'city' => 'Malang'],
-                    ['name' => 'Sambal Bawang Mertua', 'category' => 'Food & Beverage', 'city' => 'Sidoarjo'],
-                    ['name' => 'Kerajinan Kulit Tanggulangin', 'category' => 'Fashion', 'city' => 'Sidoarjo'],
-                    ['name' => 'Sari Apel Batu', 'category' => 'Beverage', 'city' => 'Batu'],
-                    ['name' => 'Kripik Buah Kane', 'category' => 'Snack', 'city' => 'Batu'],
-                    ['name' => 'Bandeng Presto Sidoarjo', 'category' => 'Food', 'city' => 'Sidoarjo'],
-                    ['name' => 'Anyaman Bambu Mojo', 'category' => 'Kriya', 'city' => 'Kediri'],
-                    ['name' => 'Tahu Takwa Bersama', 'category' => 'Food', 'city' => 'Kediri'],
-                    ['name' => 'Kopi Bromo Tengger', 'category' => 'Coffee', 'city' => 'Pasuruan'],
-                    ['name' => 'Bordir Bangil', 'category' => 'Fashion', 'city' => 'Pasuruan'],
-                ];
-            @endphp
-
-            @foreach($mockUMKMs as $umkm)
-            <div class="bg-transparent backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:bg-white/5 transition-colors group">
-                {{-- Avatar / Product Image Placeholder --}}
-                <div class="w-20 h-20 rounded-full bg-[#d9d9d9] flex justify-center items-center overflow-hidden mb-5 shrink-0 shadow-inner group-hover:scale-105 transition-transform duration-300">
-                    <svg class="w-12 h-12 text-[#999999] mt-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
-                    </svg>
+            @forelse($umkms as $umkm)
+            <div class="bg-[#1a140a]/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:bg-white/5 hover:border-[#F7AD12]/50 transition-all duration-300 group shadow-lg">
+                {{-- Product Image --}}
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#F7AD12] to-[#B47D0B]/50 flex justify-center items-center overflow-hidden mb-5 shrink-0 border-2 border-white/5 group-hover:border-[#F7AD12]/30 transition-all duration-500 relative">
+                    @if($umkm->image)
+                        @php
+                            $isExternal = \Illuminate\Support\Str::startsWith($umkm->image, ['http://', 'https://']);
+                            $imageSrc = $isExternal ? $umkm->image : asset('storage/' . $umkm->image);
+                        @endphp
+                        <img src="{{ $imageSrc }}" class="w-full h-full object-cover">
+                    @else
+                        <svg class="w-12 h-12 text-white/20 mt-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                    @endif
                 </div>
 
                 {{-- Details --}}
-                <div class="flex-grow flex flex-col items-center justify-between w-full h-[120px]">
+                <div class="flex-grow flex flex-col items-center justify-between w-full min-h-[140px]">
                     <div class="w-full">
-                        <h3 class="text-white font-bold text-sm md:text-[15px] leading-tight mb-2 line-clamp-2" style="font-family: 'Inter', sans-serif;">
-                            {{ $umkm['name'] }}
+                        <h3 class="text-white font-bold text-sm md:text-base leading-tight mb-3 line-clamp-2" style="font-family: 'Poppins', sans-serif;">
+                            {{ $umkm->name }}
                         </h3>
-                        <div class="inline-flex border border-[#F7AD12]/30 bg-[#F7AD12]/10 rounded-full px-2.5 py-0.5">
-                            <span class="text-[#F7AD12] text-[10px] font-medium">{{ $umkm['category'] }}</span>
+                        <div class="inline-flex border border-[#F7AD12]/30 bg-[#F7AD12]/10 rounded-full px-3 py-1">
+                            <span class="text-[#F7AD12] text-[10px] font-bold uppercase tracking-wider">{{ $umkm->category }}</span>
                         </div>
                     </div>
 
-                    <div class="w-full mt-auto pt-3">
-                        <p class="text-gray-500 text-xs mb-0.5">Origin</p>
-                        <p class="text-white font-bold text-sm">{{ $umkm['city'] }}</p>
+                    <div class="w-full mt-auto pt-4 border-t border-white/5">
+                        <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-1">Origin</p>
+                        <p class="text-gray-200 font-bold text-sm">{{ $umkm->city }}</p>
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-span-full py-20 text-center bg-white/5 rounded-3xl border border-white/10">
+                <p class="text-gray-400">No partner SMEs found yet.</p>
+            </div>
+            @endforelse
 
         </div>
 
-        {{-- Pagination Mockup --}}
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 bg-transparent backdrop-blur-sm p-4 rounded-xl border border-white/10">
-            <p class="text-gray-500 text-sm">Page 1 of 27</p>
-            <div class="flex items-center gap-1.5 font-medium text-xs">
-                {{-- Prev button --}}
-                <button class="px-3 py-1.5 rounded-lg text-gray-500 cursor-not-allowed">Prev</button>
-
-                <button class="w-8 h-8 rounded-lg bg-[#F7AD12] text-black font-bold flex items-center justify-center">1</button>
-                <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center">2</button>
-                <span class="w-8 h-8 rounded-lg text-gray-500 flex items-center justify-center">...</span>
-                <button class="w-8 h-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors flex items-center justify-center">27</button>
-
-                {{-- Next button --}}
-                <button class="px-3 py-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Next</button>
-            </div>
+        {{-- Laravel Real Pagination --}}
+        <div class="mt-12 flex justify-center">
+            {{ $umkms->links() }}
         </div>
 
     </section>

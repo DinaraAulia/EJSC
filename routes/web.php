@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
 // Talenta Space
-Route::view('/talenta', 'pages.talenta')->name('talenta');
+Route::get('/talenta', [\App\Http\Controllers\TalentaController::class, 'index'])->name('talenta');
 
 // UMKM Space
-Route::view('/umkm', 'pages.umkm')->name('umkm');
+Route::get('/umkm', [\App\Http\Controllers\UmkmController::class, 'index'])->name('umkm');
 
 // Achievement
 Route::view('/achievement', 'pages.achievement')->name('achievement');
