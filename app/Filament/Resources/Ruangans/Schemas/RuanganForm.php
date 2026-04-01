@@ -54,10 +54,6 @@ class RuanganForm
                         \Filament\Forms\Components\RichEditor::make('deskripsi_panjang')
                             ->label('Full Room Description')
                             ->columnSpanFull(),
-                        Toggle::make('is_tersedia')
-                            ->label('Is Available')
-                            ->required()
-                            ->default(true),
                         DatePicker::make('tgl_diperbarui')
                             ->label('Date Updated')
                             ->default(now()),

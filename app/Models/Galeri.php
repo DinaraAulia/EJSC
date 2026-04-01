@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Galeri extends Model
 {
@@ -16,11 +17,23 @@ class Galeri extends Model
         'judul',
         'tanggal',
         'deskripsi',
+        'cover_foto',
+        'album_fotos',
     ];
 
     protected $casts = [
         'tanggal' => 'date',
+        'album_fotos' => 'array',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            if (empty($model->id_galeri)) {
+                $model->id_galeri = 'GLR-' . strtoupper(\Illuminate\Support\Str::random(8));
+            }
+        });
+    }
 
     /**
      * Galeri memiliki banyak foto.

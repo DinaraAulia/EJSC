@@ -15,7 +15,7 @@ class LandingController extends Controller
         $agendas   = Agenda::whereDate('tanggal', '>=', now()->toDateString())
                            ->orderBy('tanggal', 'asc')
                            ->get();
-        $galeris   = Galeri::with('fotos')->latest()->take(8)->get();
+        $galeris   = Galeri::latest()->get();
         $partners  = Partner::all();
         $testimonis = Testimoni::where('is_published', true)->take(3)->get();
         $ruangans  = \App\Models\Ruangan::where('is_tersedia', true)->get();
