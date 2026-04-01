@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\Peminjamen\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TimePicker;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class PeminjamanForm
@@ -52,7 +52,12 @@ class PeminjamanForm
                     ->default(null),
                 TextInput::make('berkas_poster')
                     ->default(null),
-                Toggle::make('status')
+                Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
                     ->required(),
             ]);
     }
