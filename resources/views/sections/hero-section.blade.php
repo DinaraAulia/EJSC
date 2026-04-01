@@ -127,7 +127,7 @@
                     </div>
                 </div>
 
-                @forelse($agendas->take(3) as $agenda)
+                @forelse($agendas->take(2) as $agenda)
                 <div class="border-b border-[#123B7A]/30 py-2.5 last:border-0 flex justify-between items-center gap-2">
                     <p class="text-white text-[13px] font-medium truncate flex-1" title="{{ $agenda->nama_agenda }}">{{ $agenda->nama_agenda }}</p>
                     <p class="text-[#F7AD12] text-xs font-medium shrink-0 whitespace-nowrap">{{ \Carbon\Carbon::parse($agenda->tanggal)->isoFormat('D MMM, YYYY') }}</p>
