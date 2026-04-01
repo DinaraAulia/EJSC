@@ -73,10 +73,14 @@
         <div class="swiper-container mySwiper">
             <div class="swiper-wrapper">
 
-                @forelse($galeris as $galeri)
+                @foreach($galeris as $galeri)
                 <div class="swiper-slide group cursor-pointer" onclick="window.location.href='{{ route('gallery.show', $galeri->id_galeri) }}'">
-                    @if($galeri->fotos->first())
-                    <img src="{{ asset('storage/' . $galeri->fotos->first()->path_foto) }}" class="w-full h-full object-cover">
+                    @if($galeri->cover_foto)
+                        @php
+                            $isExternal = \Illuminate\Support\Str::startsWith($galeri->cover_foto, ['http://', 'https://']);
+                            $coverSrc = $isExternal ? $galeri->cover_foto : asset('storage/' . $galeri->cover_foto);
+                        @endphp
+                        <img src="{{ $coverSrc }}" class="w-full h-full object-cover">
                     @else
                     <div class="w-full h-full flex items-center justify-center bg-[#123B7A]/30">
                         <svg class="w-9 h-9 text-[#71A2CF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,34 +95,7 @@
                         <p class="text-[#F7AD12] text-xs font-semibold uppercase tracking-widest">{{ \Carbon\Carbon::parse($galeri->tanggal)->isoFormat('D MMM YYYY') }}</p>
                     </div>
                 </div>
-                @empty
-
-                {{-- Fallback Placeholders --}}
-                @php
-                $placeholders = [
-                    ['img' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80', 'title' => 'Startup Networking Night'],
-                    ['img' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80', 'title' => 'Digital Marketing Workshop'],
-                    ['img' => 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80', 'title' => 'UI/UX Design Bootcamp'],
-                    ['img' => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80', 'title' => 'Web Development Seminar'],
-                    ['img' => 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80', 'title' => 'Co-working Collaboration'],
-                    ['img' => 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80', 'title' => 'Creative Pitch Deck'],
-                    ['img' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80', 'title' => 'Leadership Masterclass'],
-                    ['img' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80', 'title' => 'Annual Strategy Meeting'],
-                ];
-                @endphp
-                @foreach($placeholders as $index => $item)
-                @php $dummyId = 'gallery-0' . ($index + 1); @endphp
-                <div class="swiper-slide group cursor-pointer" onclick="window.location.href='{{ route('gallery.show', $dummyId) }}'">
-                    <img src="{{ $item['img'] }}" class="w-full h-full object-cover">
-
-                    <div class="slide-overlay">
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-2">{{ $item['title'] }}</h3>
-                        <p class="text-[#F7AD12] text-xs font-semibold uppercase tracking-widest">{{ now()->subDays(rand(1,60))->format('d M Y') }}</p>
-                        <p class="text-gray-300 text-xs mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">Click to explore the gallery</p>
-                    </div>
-                </div>
                 @endforeach
-                @endforelse
 
             </div>
         </div>

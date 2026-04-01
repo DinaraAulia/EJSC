@@ -33,9 +33,6 @@ class RuangansTable
                     ->label('Capacity')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('is_tersedia')
-                    ->label('Is available')
-                    ->boolean(),
                 TextColumn::make('tgl_diperbarui')
                     ->label('Updated at')
                     ->date()
