@@ -40,10 +40,12 @@
 
                 <div class="flex flex-wrap items-center gap-4">
                     <a href="{{ route('peminjaman.create') }}"
+                       target="_blank"
                        class="bg-[#F7AD12] text-[#01031C] font-semibold px-6 py-3 rounded-full text-sm hover:brightness-110 transition-all shadow-lg shadow-[#F7AD12]/20">
                         Book Now
                     </a>
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSetuLm4-WwV6AMJEVmrjxPdE5XUeJOwdezKrS6XDHY1FrwDDw/viewform?fbzx=-7150895403706703302"
+                      target="_blank`"
                        class="border border-[#71A2CF] text-[#71A2CF] font-semibold px-6 py-3 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all">
                         Visitor Form
                     </a>
@@ -113,10 +115,10 @@
                     </div>
                 </div>
 
-                @forelse($agendas->take(2) as $agenda)
-                <div class="border-b border-[#123B7A]/30 py-2 last:border-0">
-                    <p class="text-white text-xs font-medium truncate">{{ $agenda->nama_agenda }}</p>
-                    <p class="text-gray-500 text-xs">{{ \Carbon\Carbon::parse($agenda->tanggal)->isoFormat('D MMM YYYY') }}</p>
+                @forelse($agendas->take(3) as $agenda)
+                <div class="border-b border-[#123B7A]/30 py-2.5 last:border-0 flex justify-between items-center gap-2">
+                    <p class="text-white text-[13px] font-medium truncate flex-1" title="{{ $agenda->nama_agenda }}">{{ $agenda->nama_agenda }}</p>
+                    <p class="text-[#F7AD12] text-xs font-medium shrink-0 whitespace-nowrap">{{ \Carbon\Carbon::parse($agenda->tanggal)->isoFormat('D MMM, YYYY') }}</p>
                 </div>
                 @empty
                 <p class="text-gray-400 text-xs leading-relaxed">

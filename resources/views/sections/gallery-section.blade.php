@@ -74,7 +74,7 @@
             <div class="swiper-wrapper">
 
                 @forelse($galeris as $galeri)
-                <div class="swiper-slide group">
+                <div class="swiper-slide group cursor-pointer" onclick="window.location.href='{{ route('gallery.show', $galeri->id_galeri) }}'">
                     @if($galeri->fotos->first())
                     <img src="{{ asset('storage/' . $galeri->fotos->first()->path_foto) }}" class="w-full h-full object-cover">
                     @else
@@ -106,8 +106,9 @@
                     ['img' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80', 'title' => 'Annual Strategy Meeting'],
                 ];
                 @endphp
-                @foreach($placeholders as $item)
-                <div class="swiper-slide group">
+                @foreach($placeholders as $index => $item)
+                @php $dummyId = 'gallery-0' . ($index + 1); @endphp
+                <div class="swiper-slide group cursor-pointer" onclick="window.location.href='{{ route('gallery.show', $dummyId) }}'">
                     <img src="{{ $item['img'] }}" class="w-full h-full object-cover">
 
                     <div class="slide-overlay">

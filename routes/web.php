@@ -17,10 +17,16 @@ Route::view('/talenta', 'pages.talenta')->name('talenta');
 // UMKM Space
 Route::view('/umkm', 'pages.umkm')->name('umkm');
 
+// Achievement
+Route::view('/achievement', 'pages.achievement')->name('achievement');
+
 // Ruangan
 Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
 Route::get('/ruangan/{id}', [RuanganController::class, 'show'])->name('ruangan.show');
 Route::get('/workspace/{slug}', [RuanganController::class, 'workspaceShow'])->name('workspace.show');
+
+// Gallery
+Route::get('/gallery/{id}', [\App\Http\Controllers\GaleriController::class, 'show'])->name('gallery.show');
 
 // Fasilitas
 Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');

@@ -48,15 +48,31 @@
                 </div>
             </div>
 
-            <a href="{{ route('talenta') }}"
-               class="nav-scroll-link text-l font-medium {{ request()->routeIs('talenta') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} transition-colors">
-                Talent
-            </a>
+            {{-- Ecosystem Dropdown --}}
+            <div class="relative group">
+                <button class="{{ request()->routeIs('talenta') || request()->routeIs('umkm') || request()->routeIs('achievement') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} text-l font-medium transition-colors flex items-center gap-1">
+                    Ecosystem
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="absolute top-full left-0 mt-2 w-48 bg-[#01031C]/90 backdrop-blur-md rounded-xl py-2
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-xl">
+                    <a href="{{ route('talenta') }}"
+                       class="block px-4 py-2 text-l {{ request()->routeIs('talenta') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
+                        Talent
+                    </a>
+                    <a href="{{ route('umkm') }}"
+                       class="block px-4 py-2 text-l {{ request()->routeIs('umkm') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
+                        Partner SMEs
+                    </a>
+                    <a href="{{ route('achievement') }}"
+                       class="block px-4 py-2 text-l {{ request()->routeIs('achievement') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
+                        Achievement
+                    </a>
+                </div>
+            </div>
 
-            <a href="{{ route('umkm') }}"
-               class="nav-scroll-link text-l font-medium {{ request()->routeIs('umkm') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} transition-colors">
-                Partner SMEs
-            </a>
 
             <a href="{{ url('/#gallery') }}"
                class="nav-scroll-link text-l font-medium text-gray-300 hover:text-white transition-colors">
@@ -150,14 +166,25 @@
         </div>
     </div>
 
-    <a href="{{ route('talenta') }}"
-       class="nav-scroll-link flex items-center gap-2 {{ request()->routeIs('talenta') ? 'text-[#F7AD12] bg-white/5 font-semibold' : 'text-gray-300 hover:text-white font-normal hover:bg-white/5' }} text-sm py-2.5 px-3 rounded-xl transition-colors">
-        Talent
-    </a>
-    <a href="{{ route('umkm') }}"
-       class="nav-scroll-link flex items-center gap-2 {{ request()->routeIs('umkm') ? 'text-[#F7AD12] bg-white/5 font-semibold' : 'text-gray-300 hover:text-white font-normal hover:bg-white/5' }} text-sm py-2.5 px-3 rounded-xl transition-colors">
-        Partner SMEs
-    </a>
+    {{-- Ecosystem Group --}}
+    <div class="py-2.5 px-3">
+        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Ecosystem</p>
+        <div class="flex flex-col space-y-1 pl-2 border-l-2 border-[#123B7A]/30">
+            <a href="{{ route('talenta') }}"
+               class="{{ request()->routeIs('talenta') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                Talent
+            </a>
+            <a href="{{ route('umkm') }}"
+               class="{{ request()->routeIs('umkm') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                Partner SMEs
+            </a>
+            <a href="{{ route('achievement') }}"
+               class="{{ request()->routeIs('achievement') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                Achievement
+            </a>
+        </div>
+    </div>
+
     <a href="{{ url('/#gallery') }}"
        class="nav-scroll-link flex items-center gap-2 text-gray-300 hover:text-white text-sm py-2.5 px-3 rounded-xl hover:bg-white/5 transition-colors">
         Gallery

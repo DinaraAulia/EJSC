@@ -11,6 +11,7 @@
             </p>
             <div class="flex flex-col sm:flex-row items-center gap-4">
                 <a href="{{ route('peminjaman.create') }}"
+                   target="_blank"
                    class="bg-[#F7AD12] text-[#01031C] font-medium px-6 py-3 rounded-full text-sm hover:brightness-110 transition-all w-full sm:w-auto text-center shadow-lg shadow-[#F7AD12]/20">
                     Book Now
                 </a>

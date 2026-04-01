@@ -12,7 +12,9 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $agendas   = Agenda::orderBy('tanggal')->get();
+        $agendas   = Agenda::whereDate('tanggal', '>=', now()->toDateString())
+                           ->orderBy('tanggal', 'asc')
+                           ->get();
         $galeris   = Galeri::with('fotos')->latest()->take(8)->get();
         $partners  = Partner::all();
         $testimonis = Testimoni::where('is_published', true)->take(3)->get();
