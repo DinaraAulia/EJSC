@@ -27,7 +27,7 @@ class AgendaForm
                     ->default(null),
                 FileUpload::make('berkas')
                     ->label('File (PNG/PDF)')
-                    ->acceptedFileTypes(['application/pdf'])
+                    ->acceptedFileTypes(['application/pdf', 'image/png'])
                     ->directory('agenda-files')
                     ->openable()
                     ->downloadable()
