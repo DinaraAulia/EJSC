@@ -18,7 +18,7 @@ Route::get('/talenta', [\App\Http\Controllers\TalentaController::class, 'index']
 Route::get('/umkm', [\App\Http\Controllers\UmkmController::class, 'index'])->name('umkm');
 
 // Achievement
-Route::view('/achievement', 'pages.achievement')->name('achievement');
+Route::get('/achievement', [\App\Http\Controllers\AchievementController::class, 'index'])->name('achievement.index');
 
 // Ruangan
 Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');

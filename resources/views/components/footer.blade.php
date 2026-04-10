@@ -58,11 +58,10 @@
                     <div>
                         <h4 class="text-white font-semibold mb-4 text-sm">Programs</h4>
                         <ul class="space-y-2">
-                            <li><span class="text-gray-400 text-sm">DPMPTSP Service</span></li>
+                            <li><span class="text-gray-400 text-sm">Collaborations</span></li>
                             <li><span class="text-gray-400 text-sm">EJSC Room</span></li>
                             <li><span class="text-gray-400 text-sm">Halal Clinic</span></li>
                             <li><span class="text-gray-400 text-sm">MJC Program</span></li>
-                            <li><span class="text-gray-400 text-sm">Collaborations</span></li>
                         </ul>
                     </div>
                     <div>

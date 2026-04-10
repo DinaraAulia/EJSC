@@ -43,7 +43,7 @@
 
             {{-- Ecosystem Dropdown --}}
             <div class="relative group">
-                <button class="{{ request()->routeIs('talenta') || request()->routeIs('umkm') || request()->routeIs('achievement') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} text-l font-medium transition-colors flex items-center gap-1">
+                <button class="{{ request()->routeIs('talenta') || request()->routeIs('umkm') || request()->routeIs('achievement.index') ? 'text-[#F7AD12]' : 'text-gray-300 hover:text-white' }} text-l font-medium transition-colors flex items-center gap-1">
                     Ecosystem
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -59,8 +59,8 @@
                        class="block px-4 py-2 text-l {{ request()->routeIs('umkm') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
                         Partner SMEs
                     </a>
-                    <a href="{{ route('achievement') }}"
-                       class="block px-4 py-2 text-l {{ request()->routeIs('achievement') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
+                    <a href="{{ route('achievement.index') }}"
+                       class="block px-4 py-2 text-l {{ request()->routeIs('achievement.index') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-300' }} hover:text-[#F7AD12] hover:bg-white/5 transition-colors">
                         Achievement
                     </a>
                 </div>
@@ -161,8 +161,8 @@
                class="{{ request()->routeIs('umkm') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 Partner SMEs
             </a>
-            <a href="{{ route('achievement') }}"
-               class="{{ request()->routeIs('achievement') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
+            <a href="{{ route('achievement.index') }}"
+               class="{{ request()->routeIs('achievement.index') ? 'text-[#F7AD12] font-semibold bg-white/5' : 'text-gray-400 hover:text-white' }} text-sm py-1.5 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 Achievement
             </a>
         </div>

@@ -74,7 +74,7 @@
         <div class="bg-[#020636] border border-[#123B7A]/40 rounded-2xl overflow-hidden">
             <div class="px-6 py-5 border-b border-[#123B7A]/40 flex flex-wrap items-center justify-between gap-4">
                 <h3 class="text-xl font-bold text-white uppercase tracking-wider">Booking History</h3>
-                <a href="{{ route('peminjaman.create', ['room' => $ruangan->id_ruangan]) }}" class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-4 py-2 rounded-full hover:brightness-110 transition-colors">
+                <a href="{{ route('peminjaman.create') }}" class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-4 py-2 rounded-full hover:brightness-110 transition-colors">
                     Book This Space
                 </a>
             </div>
@@ -95,10 +95,10 @@
                             @php
                                 $statusClass = '';
                                 $statusText = '';
-                                if ($peminjaman->status === true || $peminjaman->status === 1) {
+                                if ($peminjaman->status === 'approved') {
                                     $statusClass = 'bg-green-500/10 text-green-400 border border-green-500/20';
                                     $statusText = 'Approved';
-                                } elseif ($peminjaman->status === false || $peminjaman->status === 0) {
+                                } elseif ($peminjaman->status === 'rejected') {
                                     $statusClass = 'bg-red-500/10 text-red-400 border border-red-500/20';
                                     $statusText = 'Rejected';
                                 } else {

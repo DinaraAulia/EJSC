@@ -81,7 +81,17 @@ class PeminjamenTable
                     ->width(120)
                     ->toggleable(isToggledHiddenByDefault: false),
                 IconColumn::make('status')
-                    ->boolean(),
+                    ->label('Status')
+                    ->icons([
+                        'heroicon-o-clock' => 'pending',
+                        'heroicon-o-check-circle' => 'approved',
+                        'heroicon-o-x-circle' => 'rejected',
+                    ])
+                    ->colors([
+                        'secondary' => 'pending',
+                        'success' => 'approved',
+                        'danger' => 'rejected',
+                    ]),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

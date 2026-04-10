@@ -145,12 +145,149 @@
                                 </div>
                                 <span class="text-[10px] sm:text-[11px] font-medium text-gray-300 leading-tight">Sound &<br>Microphone</span>
                             </div>
+
+                            {{-- Facility 7 --}}
+                            <div class="flex flex-col items-center text-center group/item">
+                                <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-2 group-hover/item:bg-[#71A2CF]/20 transition-colors border border-white/10 group-hover/item:border-[#71A2CF]/50">
+                                    <svg class="w-5 h-5 text-white group-hover/item:text-[#F7AD12] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 12H2v4h16M22 12v4M7 12v4M18 8c.5-1 2-1 2 1v3M18 5c.5-1 2-1 2 1v3" />
+                                    </svg>
+                                </div>
+                                <span class="text-[10px] sm:text-[11px] font-medium text-gray-300 leading-tight">Smoking<br>Area</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <p class="text-[11px] text-[#71A2CF]/80 mt-4 italic md:text-right">*Every visitor to EJSC Bakorwil Malang is required to fill out the visitor register form.</p>
+        </div>
+    </div>
+
+    {{-- EJSC Visitor Guidelines --}}
+    <div class="mt-20 pt-12 border-t border-[#123B7A]/30">
+        <div class="text-center mb-12">
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4" style="font-family: 'Poppins', sans-serif;">
+                EJSC Visitor <span class="text-[#71A2CF]">Guidelines</span>
+            </h3>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+                Welcome! To ensure a productive and comfortable environment for everyone, please follow these procedures and regulations:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {{-- Entry Procedures --}}
+            <div class="bg-[#123B7A]/10 border border-[#123B7A]/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-[#71A2CF]/20 flex items-center justify-center border border-[#71A2CF]/30">
+                        <svg class="w-6 h-6 text-[#71A2CF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">Entry Procedures</h4>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-6 h-6 rounded-full bg-[#F7AD12]/20 flex items-center justify-center flex-shrink-0 text-[#F7AD12] font-bold text-xs mt-1">1</div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-1">Visitor Registration</h5>
+                            <p class="text-gray-400 text-sm">Please sign in by scanning the provided QR code or using the designated visitor computer.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-6 h-6 rounded-full bg-[#F7AD12]/20 flex items-center justify-center flex-shrink-0 text-[#F7AD12] font-bold text-xs mt-1">2</div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-1">Wi-Fi Access</h5>
+                            <p class="text-gray-400 text-sm">You may request the Wi-Fi password at the Customer Service (CS) desk.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-6 h-6 rounded-full bg-[#F7AD12]/20 flex items-center justify-center flex-shrink-0 text-[#F7AD12] font-bold text-xs mt-1">3</div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-1">Seating</h5>
+                            <p class="text-gray-400 text-sm">Feel free to occupy any available workspace (available on a first-come, first-served basis).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Code of Conduct --}}
+            <div class="bg-[#123B7A]/10 border border-[#123B7A]/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-[#F7AD12]/20 flex items-center justify-center border border-[#F7AD12]/30">
+                        <svg class="w-6 h-6 text-[#F7AD12]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A3.33 3.33 0 0018.333 3h-1.333c-1.104 0-2 .896-2 2v1h-6V5c0-1.104-.896-2-2-2H5.667a3.33 3.33 0 00-2.618 1.984C2.42 6.643 2 8.27 2 10c0 1.73.42 3.357 1.049 5.016A3.33 3.33 0 005.667 17h12.666a3.33 3.33 0 002.618-1.984C21.58 13.357 22 11.73 22 10c0-1.73-.42-3.357-1.049-5.016z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">Code of Conduct</h4>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {{-- Do's --}}
+                    <div>
+                        <h5 class="text-[#10B981] font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Do's
+                        </h5>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#10B981] mt-0.5">•</span>
+                                Register Upon Arrival
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#10B981] mt-0.5">•</span>
+                                Wear Proper Footwear
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#10B981] mt-0.5">•</span>
+                                Dress Professionally
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#10B981] mt-0.5">•</span>
+                                Maintain Cleanliness
+                            </li>
+                        </ul>
+                    </div>
+
+                    {{-- Don'ts --}}
+                    <div>
+                        <h5 class="text-[#EF4444] font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                            Don'ts
+                        </h5>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#EF4444] mt-0.5">•</span>
+                                No Short Pants
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#EF4444] mt-0.5">•</span>
+                                No Sandals / Flip-flops
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#EF4444] mt-0.5">•</span>
+                                No Disturbances
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 text-xs sm:text-sm">
+                                <span class="text-[#EF4444] mt-0.5">•</span>
+                                No Smoking Inside Building
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <div class="inline-block px-6 py-3 bg-[#71A2CF]/10 border border-[#71A2CF]/20 rounded-2xl">
+                <p class="text-[#71A2CF] text-sm italic">
+                    <span class="font-bold not-italic">Note:</span> Your cooperation helps us maintain a vibrant and focused creative community. Enjoy your time at EJSC!
+                </p>
+            </div>
         </div>
     </div>
 </section>

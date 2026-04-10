@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Achievement extends Model
 {
-    protected $fillable = ['title', 'year', 'issuer', 'description', 'image'];
+    protected $fillable = ['title', 'year', 'category', 'description', 'image'];
 }

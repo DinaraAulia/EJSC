@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 class PeminjamanResource extends Resource
 {
     protected static ?string $model = Peminjaman::class;
+    protected static ?string $slug = 'peminjaman';
 
 protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
     protected static string|\UnitEnum|null $navigationGroup = 'Space & Facilities';

@@ -30,122 +30,89 @@
     {{-- Achievements Gallery Section --}}
     <section class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
 
-        {{-- Filters/Categories (Optional, for visual flair) --}}
+        {{-- Filters/Categories --}}
         <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
-            <button class="px-5 py-2 rounded-full bg-[#F7AD12]/20 border border-[#F7AD12]/50 text-[#F7AD12] text-sm font-medium hover:bg-[#F7AD12]/30 transition-colors">
+            <a href="{{ route('achievement.index') }}" class="px-5 py-2 rounded-full {{ !request('category') ? 'bg-[#F7AD12] text-black font-bold' : 'bg-white/5 border border-white/10 text-gray-400 font-medium hover:text-white hover:bg-white/10' }} text-sm transition-all duration-300">
                 All Awards
-            </button>
-            <button class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm font-medium hover:text-white hover:bg-white/10 transition-colors">
+            </a>
+            <a href="{{ route('achievement.index', ['category' => 'provincial']) }}" class="px-5 py-2 rounded-full {{ request('category') === 'provincial' ? 'bg-[#F7AD12] text-black font-bold' : 'bg-white/5 border border-white/10 text-gray-400 font-medium hover:text-white hover:bg-white/10' }} text-sm transition-all duration-300">
                 Provincial
-            </button>
-            <button class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-sm font-medium hover:text-white hover:bg-white/10 transition-colors">
+            </a>
+            <a href="{{ route('achievement.index', ['category' => 'national']) }}" class="px-5 py-2 rounded-full {{ request('category') === 'national' ? 'bg-[#F7AD12] text-black font-bold' : 'bg-white/5 border border-white/10 text-gray-400 font-medium hover:text-white hover:bg-white/10' }} text-sm transition-all duration-300">
                 National
-            </button>
+            </a>
         </div>
 
         {{-- Certificates Grid --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            {{-- Mockup Data for Certificates --}}
-            @php
-                $achievements = [
-                    [
-                        'title' => 'Best Co-Working Space Innovation',
-                        'year' => '2025',
-                        'issuer' => 'Government of East Java',
-                        'description' => 'Awarded for exceptional contribution to providing modern, free public collaborative spaces for youth and creatives.',
-                        'image' => 'https://images.unsplash.com/photo-1589330694653-ded6df03f754?q=80&w=600&auto=format&fit=crop' // Placeholder certificate-like image
-                    ],
-                    [
-                        'title' => 'Excellence in SME Fostering',
-                        'year' => '2024',
-                        'issuer' => 'Ministry of Cooperatives and SMEs',
-                        'description' => 'Recognition for successfully incubating over 300+ local MSMEs towards digital transformation in the Bakorwil Malang region.',
-                        'image' => 'https://images.unsplash.com/photo-1523726496-e261f234f9a0?q=80&w=600&auto=format&fit=crop'
-                    ],
-                    [
-                        'title' => 'Top Regional Creative Hub',
-                        'year' => '2024',
-                        'issuer' => 'Creative Economy Agency (Bekraf)',
-                        'description' => 'Honored as the most active creative hub in East Java facilitating young talents and local startups.',
-                        'image' => 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=600&auto=format&fit=crop'
-                    ],
-                    [
-                        'title' => 'Outstanding Public Service App',
-                        'year' => '2023',
-                        'issuer' => 'Governor of East Java',
-                        'description' => 'Awarded for the efficient digital booking system utilized by the public for accessing EJSC facilities.',
-                        'image' => 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600&auto=format&fit=crop'
-                    ],
-                    [
-                        'title' => 'Community Engagement Leader',
-                        'year' => '2023',
-                        'issuer' => 'Malang City Government',
-                        'description' => 'Acknowledged for organizing 50+ impactful workshops, seminars, and networking events in a single year.',
-                        'image' => 'https://images.unsplash.com/photo-1546422904-90eab23c3d7e?q=80&w=600&auto=format&fit=crop'
-                    ],
-                    [
-                        'title' => 'Best Creative Documentation',
-                        'year' => '2022',
-                        'issuer' => 'East Java Information Agency',
-                        'description' => 'An award for outstanding content creation, reporting, and documentation of local youth movements.',
-                        'image' => 'https://images.unsplash.com/photo-1563804447971-6e113ab80713?q=80&w=600&auto=format&fit=crop'
-                    ],
-                ];
-            @endphp
-
-            @foreach($achievements as $ach)
-            <div class="group relative rounded-2xl overflow-hidden bg-[#101524]/60 backdrop-blur-md border border-white/10 hover:border-[#F7AD12]/40 transition-all duration-500 shadow-lg hover:shadow-[0_0_30px_rgba(247,173,18,0.15)] flex flex-col h-full transform hover:-translate-y-2">
+            @forelse($achievements ?? [] as $ach)
+            <div class="group relative rounded-3xl overflow-hidden bg-[#101524]/60 backdrop-blur-md border border-white/10 hover:border-[#F7AD12]/40 transition-all duration-500 shadow-lg hover:shadow-[0_0_30px_rgba(247,173,18,0.15)] flex flex-col h-full transform hover:-translate-y-2">
                 {{-- Diagonal glowing accent inside the card --}}
                 <div class="absolute inset-0 bg-gradient-to-tr from-[#F7AD12]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                {{-- Image Container (The Certificate) --}}
-                <div class="relative w-full aspect-[4/3] overflow-hidden bg-black/40 p-4 shrink-0">
-                    <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 z-10 flex items-center gap-1.5">
-                        <svg class="w-3.5 h-3.5 text-[#F7AD12]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        <span class="text-white text-xs font-bold">{{ $ach['year'] }}</span>
+                {{-- Certificate Preview Container --}}
+                <div class="relative w-full aspect-[4/3] overflow-hidden bg-[#020636] p-4 shrink-0">
+                    <div class="absolute top-2 right-2 bg-[#F7AD12] px-3 py-1 rounded-full z-10 shadow-lg">
+                        <span class="text-black text-xs font-black">{{ $ach->year }}</span>
                     </div>
 
-                    {{-- Image styling to look slightly like a framed document or creative image --}}
-                    <div class="w-full h-full rounded-xl overflow-hidden relative shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 transition-transform duration-700 group-hover:scale-105">
-                        <img src="{{ $ach['image'] }}" alt="Certificate {{ $ach['title'] }}" class="w-full h-full object-cover object-center grayscale-[20%] group-hover:grayscale-0 transition-all duration-500">
+                    {{-- Document/Certificate Visual --}}
+                    <div class="w-full h-full rounded-2xl overflow-hidden relative shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 bg-[#123B7A]/20 transition-all duration-500">
+                        @if($ach->image && \Illuminate\Support\Str::endsWith($ach->image, '.pdf'))
+                            {{-- PDF Preview --}}
+                            <div class="w-full h-full relative group/pdf">
+                                <iframe src="{{ asset('storage/' . $ach->image) }}#toolbar=0&navpanes=0&scrollbar=0" class="w-full h-full pointer-events-none scale-110" frameborder="0"></iframe>
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#020636]/80 via-transparent to-transparent opacity-60"></div>
+                            </div>
+                        @else
+                            {{-- Fallback image if it's not a PDF --}}
+                            <img src="{{ asset('storage/' . $ach->image) }}" class="w-full h-full object-cover rounded-xl grayscale-[20%] group-hover:grayscale-0 transition-all duration-500">
+                        @endif
+
                         {{-- Subtle inner glow on image --}}
-                        <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] pointer-events-none"></div>
+                        <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] pointer-events-none"></div>
                     </div>
                 </div>
 
                 {{-- Content Details --}}
-                <div class="p-6 flex-grow flex flex-col justify-between">
+                <div class="p-8 flex-grow flex flex-col justify-between">
                     <div>
-                        <div class="inline-flex items-center gap-1.5 text-xs text-[#71A2CF] font-medium mb-3">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="inline-flex items-center gap-2 text-[10px] text-[#71A2CF] font-black uppercase tracking-widest mb-4">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            {{ $ach['issuer'] }}
+                            {{ $ach->category }}
                         </div>
 
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#F7AD12] transition-colors leading-tight" style="font-family: 'Poppins', sans-serif;">
-                            {{ $ach['title'] }}
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#F7AD12] transition-colors leading-tight" style="font-family: 'Poppins', sans-serif;">
+                            {{ $ach->title }}
                         </h3>
 
                         <p class="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                            {{ $ach['description'] }}
+                            {{ $ach->description }}
                         </p>
                     </div>
 
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <button class="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group/btn w-full">
-                            <span class="font-medium">View Certificate</span>
-                            <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </button>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <a href="{{ asset('storage/' . $ach->image) }}" target="_blank" class="flex items-center justify-between text-sm text-gray-300 hover:text-[#F7AD12] transition-all group/btn w-full">
+                            <span class="font-bold tracking-tight">View Certificate</span>
+                            <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:border-[#F7AD12]/50 group-hover/btn:bg-[#F7AD12]/10 transform transition-all">
+                                <svg class="w-4 h-4 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-span-full py-20 text-center bg-[#101524]/60 rounded-3xl border border-white/10">
+                <p class="text-gray-400 font-medium">No accomplishments recorded yet. We're still building our track record!</p>
+            </div>
+            @endforelse
+
+        </div>
 
         </div>
 

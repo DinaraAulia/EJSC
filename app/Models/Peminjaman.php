@@ -37,10 +37,20 @@ class Peminjaman extends Model
 
     protected $casts = [
         'tgl_penggunaan' => 'date',
-        // 'jam_mulai' and 'jam_berakhir' are handled as strings (time)
-        'status'         => 'boolean',
+        'status'         => 'string', // Ensure consistency with form options
         'fasilitas_tambahan' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->id_peminjaman)) {
+                // Generate Booking ID: BOK-20240402-XXXX
+                $model->id_peminjaman = 'BOK-' . date('Ymd') . '-' . strtoupper(bin2hex(random_bytes(2)));
+            }
+        });
+    }
 
     /**
      * Peminjaman ini terkait dengan ruangan tertentu.
