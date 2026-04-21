@@ -1,0 +1,68 @@
+services:
+  # App Service (Laravel)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ejsc-app
+    restart: always
+    working_dir: /var/www
+    environment:
+      DB_CONNECTION: ${DB_CONNECTION:-mysql}
+      DB_HOST: db
+      DB_PORT: ${DB_PORT:-3306}
+      DB_DATABASE: ${DB_DATABASE:-ejsc_website}
+      DB_USERNAME: ${DB_USERNAME:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/var/www
+    networks:
+      - ejsc-network
+
+  # Web Server (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: ejsc-nginx
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker-config/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      app:
+        condition: service_started
+    networks:
+      - ejsc-network
+
+  # Database (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: ejsc-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-ejsc_website}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysql -h 127.0.0.1 -uroot -e 'SELECT 1' > /dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    volumes:
+      - ejsc-db-data:/var/lib/mysql
+    networks:
+      - ejsc-network
+
+networks:
+  ejsc-network:
+    driver: bridge
+
+volumes:
+  ejsc-db-data:
