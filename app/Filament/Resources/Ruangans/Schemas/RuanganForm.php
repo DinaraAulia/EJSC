@@ -30,7 +30,9 @@ class RuanganForm
                         \Filament\Forms\Components\FileUpload::make('gambar')
                             ->label('Image')
                             ->image()
-                            ->directory('ruangan-images'),
+                            ->directory('ruangan-images')
+                            ->disk('public')
+                            ->visibility('public'),
                     ])->columns(2),
                     
                 \Filament\Schemas\Components\Section::make('Room Details')
