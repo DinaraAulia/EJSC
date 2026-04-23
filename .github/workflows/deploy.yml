@@ -42,6 +42,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/${{ secrets.SSH_USER }}/EJSC
+            sudo chown -R www-data:www-data storage bootstrap/cache public
+            sudo chmod -R 775 storage bootstrap/cache public
+            
             docker compose exec -T app php artisan config:cache
             docker compose exec -T app php artisan route:cache
             docker compose exec -T app php artisan view:clear
