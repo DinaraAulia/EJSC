@@ -1,8 +1,11 @@
-name: Deploy EJSC to VPS
+name: Continuous Deployment
 
 on:
   push:
-    branches: [ main ] # Jalankan hanya saat push ke branch main
+    paths:
+      - '**.php'       # Hanya jalan kalau ada perubahan file penting
+      - '**.blade.php' 
+      - 'resources/**' 
 
 jobs:
   deploy:
