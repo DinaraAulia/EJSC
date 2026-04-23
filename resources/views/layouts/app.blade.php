@@ -24,21 +24,6 @@
     <meta name="twitter:image" content="{{ asset('images/LogoEJSC.png') }}">
 
     <link rel="icon" href="{{ asset('images/LogoEJSC.png') }}" type="image/x-icon">
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "GovernmentOrganization",
-  "name": "EJSC Bakorwil III Malang",
-  "url": "https://ejsc.my.id",
-  "logo": "https://www.ejsc.my.id/images/LogoEJSC.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Malang",
-    "addressRegion": "Jawa Timur",
-    "addressCountry": "ID"
-  }
-}
-</script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
