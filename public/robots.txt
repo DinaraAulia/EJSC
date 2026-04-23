@@ -1,2 +1,30 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /node_modules/
+Disallow: /.env
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://ejsc.my.id/sitemap.xml
