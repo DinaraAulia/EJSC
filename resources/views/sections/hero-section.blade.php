@@ -25,7 +25,7 @@
                     <span class="block mt-1">
                         WITH
                         <span class="relative inline-block text-white">
-                            UNESA
+                            EJSC
                             <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
                                 <path d="M2 9C50 3 150 3 198 9" stroke="#E3733D" stroke-width="3.5" stroke-linecap="round"/>
                             </svg>

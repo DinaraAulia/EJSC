@@ -42,10 +42,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/${{ secrets.SSH_USER }}/EJSC
+            docker compose exec -T app php artisan optimize:clear
+            
             sudo chown -R www-data:www-data storage bootstrap/cache public
-            sudo chmod -R 775 storage bootstrap/cache public
+            sudo chmod -R 777 storage bootstrap/cache public
             
             docker compose exec -T app php artisan config:cache
-            docker compose exec -T app php artisan route:cache
-            docker compose exec -T app php artisan view:clear
+            docker compose exec -T app php artisan view:cache
             echo "Deployment Success, May the force be with you!"
