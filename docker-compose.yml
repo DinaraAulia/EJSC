@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: ejsc-app
+    user: "1003:1003"
     restart: always
     working_dir: /var/www
     environment:
