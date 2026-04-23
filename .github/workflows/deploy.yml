@@ -28,8 +28,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "."
-          target: "/home/${{ secrets.SSH_USER }}/EJSC" # Sesuaikan folder di VPS
+          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github"
+          target: "/home/${{ secrets.SSH_USER }}/EJSC"
 
       - name: Refresh Docker and Cache
         uses: appleboy/ssh-action@v0.1.10
