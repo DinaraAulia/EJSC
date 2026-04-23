@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github"
+          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github, !.env"
           target: "/home/${{ secrets.SSH_USER }}/EJSC"
 
       - name: Refresh Docker and Cache
@@ -42,4 +42,4 @@ jobs:
             docker compose exec -T app php artisan config:cache
             docker compose exec -T app php artisan route:cache
             docker compose exec -T app php artisan view:clear
-            echo "Deployment Sukses, Han!"
+            echo "Deployment Success, May the force be with you!"
