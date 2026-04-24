@@ -59,7 +59,7 @@ services:
       retries: 20
       start_period: 20s
     volumes:
-      - ejsc-db-data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
     networks:
       - ejsc-network
 
