@@ -61,7 +61,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github,!.env,!.env.testing"
+          source: ".,!storage,!bootstrap/cache,!node_modules,!vendor,!.git,!.github,!.env,!.env.testing"
           target: "/home/${{ secrets.SSH_USER }}/EJSC"
 
       - name: Refresh Docker and Cache
