@@ -3,7 +3,7 @@ name: Continuous Deployment
 on:
   push:
     paths:
-      - '**.php'       # Hanya jalan kalau ada perubahan file penting
+      - '**.php'
       - '**.blade.php' 
       - 'resources/**' 
       - 'public/**'
@@ -18,6 +18,30 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install PHP Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP Artisan Test
+        run: |
+          cp .env.testing .env
+          php artisan key:generate
+          php artisan test
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -35,7 +59,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github,!.env"
+          source: ".,!storage,!bootstrap/cache,!node_modules,!.git,!.github,!.env,!.env.testing"
           target: "/home/${{ secrets.SSH_USER }}/EJSC"
 
       - name: Refresh Docker and Cache
@@ -46,7 +70,14 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/${{ secrets.SSH_USER }}/EJSC
-            chmod -R 775 storage bootstrap/cache public
+            # Pastikan jembatan storage ada
+            docker compose exec -T app php artisan storage:link || true
             
+            # Bersihkan cache
             docker compose exec -T app php artisan optimize:clear
+            
+            # Beri izin akses folder agar tidak 404/Forbidden
+            sudo chmod -R 775 storage bootstrap/cache public
+            sudo chown -R 1003:1003 storage bootstrap/cache public
+            
             echo "Deployment Success, May the force be with you!"
