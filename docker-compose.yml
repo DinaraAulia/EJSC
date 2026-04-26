@@ -47,6 +47,7 @@ services:
     container_name: ejsc-db
     restart: always
     environment:
+      # Variabel ini akan otomatis membuat database saat pertama kali dijalankan
       MYSQL_DATABASE: ${DB_DATABASE:-ejsc_website}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -59,7 +60,8 @@ services:
       retries: 20
       start_period: 20s
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      # Diperbaiki: Menggunakan named volume yang dideklarasikan di bawah
+      - ejsc-db-data:/var/lib/mysql
     networks:
       - ejsc-network
 
@@ -68,4 +70,5 @@ networks:
     driver: bridge
 
 volumes:
+  # Deklarasi volume agar data tersimpan permanen di storage Docker
   ejsc-db-data:
