@@ -1,7 +1,6 @@
 $updates = @{
     "Achievements\AchievementResource.php" = @("heroicon-o-trophy", "Content Management", "Achievement", "Achievements")
     "Agendas\AgendaResource.php" = @("heroicon-o-calendar-days", "Content Management", "Event & Agenda", "Events & Agendas")
-    "Fasilitas\FasilitasResource.php" = @("heroicon-o-squares-plus", "Space & Facilities", "Facility", "Facilities")
     "Galeris\GaleriResource.php" = @("heroicon-o-photo", "Content Management", "Gallery Album", "Gallery Albums")
     "GaleriFotos\GaleriFotoResource.php" = @("heroicon-o-camera", "Content Management", "Gallery Photo", "Gallery Photos")
     "Partners\PartnerResource.php" = @("heroicon-o-handshake", "User & Network", "Collaboration Partner", "Collaboration Partners")
@@ -17,16 +16,16 @@ foreach ($key in $updates.Keys) {
     $file = "d:\ejsc-website\app\Filament\Resources\$key"
     if (Test-Path $file) {
         $content = Get-Content $file -Raw
-        
+
         $pattern = '(?m)^[ \t]*protected\s+static\s+(string\|BackedEnum\|null|\?string)\s+\$navigationIcon\s*=\s*[^;]+;'
-        
+
         $icon = $updates[$key][0]
         $group = $updates[$key][1]
         $single = $updates[$key][2]
         $plural = $updates[$key][3]
-        
+
         $replacement = "protected static ?string `$navigationIcon = '$icon';`n    protected static ?string `$navigationGroup = '$group';`n    protected static ?string `$modelLabel = '$single';`n    protected static ?string `$pluralModelLabel = '$plural';"
-        
+
         $newContent = $content -replace $pattern, $replacement
         Set-Content -Path $file -Value $newContent -Encoding UTF8
     }

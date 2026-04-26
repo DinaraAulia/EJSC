@@ -66,7 +66,7 @@
                 @empty
                 {{-- Placeholder loop sama seperti di atas, gunakan struktur slide yang sama --}}
                 @foreach([
-                    ['name' => 'Budi Santoso', 'rating' => 5, 'text' => 'EJSC adalah tempat terbaik untuk bekerja. Fasilitas lengkap dan suasananya mendukung produktivitas tinggi.'],
+                    ['name' => 'Budi Santoso', 'rating' => 5, 'text' => 'EJSC adalah tempat terbaik untuk bekerja. Ruangannya nyaman dan suasananya mendukung produktivitas tinggi.'],
                     ['name' => 'Siti Rahma', 'rating' => 5, 'text' => 'Sangat merekomendasikan untuk acara perusahaan. Event space yang luas dan tim yang profesional.'],
                     ['name' => 'Ahmad Fauzi', 'rating' => 4, 'text' => 'Hot desk yang nyaman dengan koneksi internet super cepat.'],
                     ['name' => 'Dewi Lestari', 'rating' => 5, 'text' => 'Tempatnya keren banget buat meeting santai.']
