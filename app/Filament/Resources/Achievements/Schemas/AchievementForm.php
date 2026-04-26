@@ -67,7 +67,9 @@ class AchievementForm
                             ->disk('public')
                             ->directory('achievements')
                             ->preserveFilenames()
-                            ->required(),
+                            ->required()
+                            ->openable()
+                            ->downloadable(),
                     ]),
             ]);
     }

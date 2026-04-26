@@ -6,10 +6,19 @@ use Illuminate\Http\Request;
 
 class TalentaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $talentas = \App\Models\Talenta::latest()->paginate(12);
+        $search = $request->input('search');
 
-        return view('pages.talenta', compact('talentas'));
+        $talentas = \App\Models\Talenta::when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                      ->orWhere('city', 'like', "%{$search}%")
+                      ->orWhere('skill', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('pages.talenta', compact('talentas', 'search'));
     }
 }

@@ -16,7 +16,9 @@ class RuangansTable
         return $table
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('gambar')
-                    ->label('Thumbnail'),
+                    ->label('Thumbnail')
+                    ->circular()
+                    ->disk('public'),
                 TextColumn::make('id_ruangan')
                     ->label('Id room')
                     ->searchable(),

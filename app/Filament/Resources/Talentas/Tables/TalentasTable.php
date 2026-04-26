@@ -16,13 +16,18 @@ class TalentasTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('portfolio')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('skill')
+                    ->label('Expertise')
+                    ->searchable(),
                 TextColumn::make('city')
                     ->searchable(),
-                TextColumn::make('avatar')
-                    ->searchable(),
+                TextColumn::make('portfolio')
+                    ->label('Portfolio')
+                    ->formatStateUsing(fn () => 'View PDF')
+                    ->url(fn ($record) => asset('storage/' . $record->portfolio))
+                    ->openUrlInNewTab()
+                    ->color('primary')
+                    ->icon('heroicon-o-document-text'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

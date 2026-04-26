@@ -38,7 +38,9 @@ class GaleriForm
                                             ->image()
                                             ->disk('public')
                                             ->visibility('public')
-                                            ->directory('gallery-covers'),
+                                            ->directory('gallery-covers')
+                                            ->openable()
+                                            ->downloadable(),
                                     ]),
                                 \Filament\Schemas\Components\Tabs\Tab::make('Direct URL')
                                     ->schema([
@@ -66,7 +68,9 @@ class GaleriForm
                                             ->maxFiles(4)
                                             ->disk('public')
                                             ->visibility('public')
-                                            ->directory('gallery-albums'),
+                                            ->directory('gallery-albums')
+                                            ->openable()
+                                            ->downloadable(),
                                     ]),
                                 \Filament\Schemas\Components\Tabs\Tab::make('Direct URLs')
                                     ->schema([

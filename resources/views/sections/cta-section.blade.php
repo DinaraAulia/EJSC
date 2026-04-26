@@ -15,7 +15,8 @@
                    class="bg-[#F7AD12] text-[#01031C] font-medium px-6 py-3 rounded-full text-sm hover:brightness-110 transition-all w-full sm:w-auto text-center shadow-lg shadow-[#F7AD12]/20">
                     Book Now
                 </a>
-                <a href="{{ route('pengunjung.create') }}"
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSetuLm4-WwV6AMJEVmrjxPdE5XUeJOwdezKrS6XDHY1FrwDDw/viewform?fbzx=-7150895403706703302"
+                   target="_blank"
                    class="bg-transparent border border-[#71A2CF] text-[#71A2CF] font-medium px-6 py-3 rounded-full text-sm hover:bg-[#71A2CF] hover:text-[#01031C] transition-all w-full sm:w-auto text-center">
                     Visitor Form
                 </a>

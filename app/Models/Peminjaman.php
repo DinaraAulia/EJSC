@@ -13,32 +13,28 @@ class Peminjaman extends Model
 
     protected $fillable = [
         'id_peminjaman',
+        'kategori_instansi',
         'ruangan_id',
         'nama_kegiatan',
-        'latar_belakang',
-        'tujuan_kegiatan',
-        'sasaran_peserta',
         'jumlah_peserta',
-        'narasumber',
         'pj_kegiatan',
         'instansi',
         'alamat_instansi',
-        'wilayah',
         'no_hp_pj',
-        'fasilitas_tambahan',
         'tgl_penggunaan',
+        'tgl_berakhir',
         'jam_mulai',
         'jam_berakhir',
-        'berkas_ktp',
         'berkas_surat',
-        'berkas_poster',
         'status',
+        'bersedia_ubah_jadwal',
     ];
 
     protected $casts = [
         'tgl_penggunaan' => 'date',
-        'status'         => 'string', // Ensure consistency with form options
-        'fasilitas_tambahan' => 'array',
+        'tgl_berakhir' => 'date',
+        'bersedia_ubah_jadwal' => 'boolean',
+        'status'         => 'string',
     ];
 
     protected static function boot()

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Peminjaman;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
@@ -16,74 +14,111 @@ class PeminjamanController extends Controller
         return view('peminjaman.create', compact('ruangans'));
     }
 
+    /**
+     * AJAX: Check if the room is already booked in the given time range.
+     */
+    public function check(Request $request)
+    {
+        $request->validate([
+            'ruangan_id'    => 'required|string',
+            'tgl_penggunaan'=> 'required|date',
+            'tgl_berakhir'  => 'required|date|after_or_equal:tgl_penggunaan',
+            'jam_mulai'     => 'required',
+            'jam_berakhir'  => 'required',
+        ]);
+
+        $conflict = Peminjaman::where('ruangan_id', $request->ruangan_id)
+            ->where('status', '!=', 'rejected')
+            ->where(function ($q) use ($request) {
+                // Date ranges overlap
+                $q->where('tgl_penggunaan', '<=', $request->tgl_berakhir)
+                  ->where('tgl_berakhir', '>=', $request->tgl_penggunaan);
+            })
+            ->where(function ($q) use ($request) {
+                // Time ranges overlap
+                $q->where('jam_mulai', '<', $request->jam_berakhir)
+                  ->where('jam_berakhir', '>', $request->jam_mulai);
+            })
+            ->exists();
+
+        if ($conflict) {
+            $ruangan = Ruangan::find($request->ruangan_id);
+            return response()->json([
+                'conflict' => true,
+                'message' => 'The ' . ($ruangan->nama_ruangan ?? 'selected room') . ' is already booked on the selected date and time. Please choose a different schedule.',
+            ]);
+        }
+
+        return response()->json(['conflict' => false]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'kategori_instansi' => 'required|string|max:100',
+            'instansi'          => 'required|string|max:100',
+            'alamat_instansi'   => 'required|string|max:255',
             'nama_kegiatan'     => 'required|string|max:100',
-            'latar_belakang'    => 'nullable|string|max:100',
-            'tujuan_kegiatan'   => 'nullable|string|max:100',
-            'sasaran_peserta'   => 'nullable|string|max:100',
-            'jumlah_peserta'    => 'nullable|integer|min:1',
-            'narasumber'        => 'nullable|string|max:100',
-            'pj_kegiatan'       => 'required|string|max:100',
-            'instansi'          => 'nullable|string|max:100',
-            'alamat_instansi'   => 'nullable|string|max:100',
-            'wilayah'           => 'nullable|string|max:100',
-            'no_hp_pj'          => 'required|string',
-            'fasilitas_tambahan'=> 'nullable|array',
+            'jumlah_peserta'    => 'required|integer|min:1',
             'ruangan_id'        => 'required|string|exists:ruangans,id_ruangan',
             'tgl_penggunaan'    => 'required|date',
+            'tgl_berakhir'      => 'required|date|after_or_equal:tgl_penggunaan',
             'jam_mulai'         => 'required',
             'jam_berakhir'      => 'required',
-            'berkas_ktp'        => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'berkas_surat'      => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
-            'berkas_poster'     => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
+            'pj_kegiatan'       => 'required|string|max:100',
+            'no_hp_pj'          => 'required|string',
+            'berkas_surat'      => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',
+            'bersedia_ubah_jadwal' => 'required|accepted',
         ]);
 
-        // Normalize fasilitas into string for long description
-        $facilitiesText = null;
-        if (!empty($validated['fasilitas_tambahan'])) {
-            $facilitiesText = is_array($validated['fasilitas_tambahan']) ? implode(', ', $validated['fasilitas_tambahan']) : (string) $validated['fasilitas_tambahan'];
+        // Double-check for conflict (server-side safety)
+        $conflict = Peminjaman::where('ruangan_id', $validated['ruangan_id'])
+            ->where('status', '!=', 'rejected')
+            ->where(function ($q) use ($validated) {
+                $q->where('tgl_penggunaan', '<=', $validated['tgl_berakhir'])
+                  ->where('tgl_berakhir', '>=', $validated['tgl_penggunaan']);
+            })
+            ->where(function ($q) use ($validated) {
+                $q->where('jam_mulai', '<', $validated['jam_berakhir'])
+                  ->where('jam_berakhir', '>', $validated['jam_mulai']);
+            })
+            ->exists();
+
+        if ($conflict) {
+            return back()->withInput()->withErrors([
+                'tgl_penggunaan' => 'This room is already booked on the selected dates and times. Please choose a different schedule.',
+            ]);
         }
 
-        // Handle file uploads
-        $gambarPath = null;
-        $ktpPath = null;
         $suratPath = null;
-        if ($request->hasFile('berkas_poster')) {
-            $gambarPath = $request->file('berkas_poster')->store('peminjaman', 'public');
-        }
-        if ($request->hasFile('berkas_ktp')) {
-            $ktpPath = $request->file('berkas_ktp')->store('peminjaman', 'public');
-        }
         if ($request->hasFile('berkas_surat')) {
             $suratPath = $request->file('berkas_surat')->store('peminjaman', 'public');
         }
 
         Peminjaman::create([
-            // ID will be auto-generated by Model's boot method
-            'ruangan_id'        => $validated['ruangan_id'],
-            'nama_kegiatan'     => $validated['nama_kegiatan'],
-            'latar_belakang'    => $validated['latar_belakang'],
-            'tujuan_kegiatan'   => $validated['tujuan_kegiatan'],
-            'sasaran_peserta'   => $validated['sasaran_peserta'],
-            'jumlah_peserta'    => $validated['jumlah_peserta'],
-            'narasumber'        => $validated['narasumber'],
-            'pj_kegiatan'       => $validated['pj_kegiatan'],
-            'instansi'          => $validated['instansi'],
-            'alamat_instansi'   => $validated['alamat_instansi'],
-            'wilayah'           => $validated['wilayah'],
-            'no_hp_pj'          => $validated['no_hp_pj'],
-            'fasilitas_tambahan'=> $validated['fasilitas_tambahan'] ?? [],
-            'tgl_penggunaan'    => $validated['tgl_penggunaan'],
-            'jam_mulai'         => $validated['jam_mulai'],
-            'jam_berakhir'      => $validated['jam_berakhir'],
-            'berkas_ktp'        => $ktpPath,
-            'berkas_surat'      => $suratPath,
-            'berkas_poster'     => $gambarPath,
-            'status'            => 'pending',
+            'kategori_instansi'    => $validated['kategori_instansi'],
+            'ruangan_id'           => $validated['ruangan_id'],
+            'instansi'             => $validated['instansi'],
+            'alamat_instansi'      => $validated['alamat_instansi'],
+            'nama_kegiatan'        => $validated['nama_kegiatan'],
+            'jumlah_peserta'       => $validated['jumlah_peserta'],
+            'pj_kegiatan'          => $validated['pj_kegiatan'],
+            'no_hp_pj'             => $validated['no_hp_pj'],
+            'tgl_penggunaan'       => $validated['tgl_penggunaan'],
+            'tgl_berakhir'         => $validated['tgl_berakhir'],
+            'jam_mulai'            => $validated['jam_mulai'],
+            'jam_berakhir'         => $validated['jam_berakhir'],
+            'berkas_surat'         => $suratPath,
+            'bersedia_ubah_jadwal' => true,
+            'status'               => 'pending',
         ]);
 
-        return redirect()->route('home')->with('success', 'Permohonan peminjaman ruangan berhasil dikirim! Kami akan menghubungi Anda segera.');
+        // Redirect to the workspace page the booking was for
+        $ruangan = Ruangan::find($validated['ruangan_id']);
+        $redirectRoute = $ruangan && $ruangan->slug
+            ? route('workspace.show', $ruangan->slug)
+            : route('home');
+
+        return redirect($redirectRoute)->with('success', 'Your room booking request has been submitted! Please confirm to the Bakorwil III Malang Contact Person no later than H+1.');
     }
 }

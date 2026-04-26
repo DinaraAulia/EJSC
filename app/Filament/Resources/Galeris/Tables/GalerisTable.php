@@ -14,9 +14,6 @@ class GalerisTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\ImageColumn::make('cover_foto')
-                    ->label('Cover')
-                    ->square(),
                 TextColumn::make('id_galeri')
                     ->label('ID')
                     ->searchable(),

@@ -33,39 +33,54 @@
                     {{ $ruangan->deskripsi ?? 'No description available for this workspace.' }}
                 </p>
 
-                <div class="flex items-center gap-6 text-sm">
+                <div class="flex flex-wrap items-center gap-6 text-sm">
+                    @if($ruangan->kapasitas)
                     <div class="flex items-center gap-2 text-gray-400">
                         <svg class="w-5 h-5 text-[#71A2CF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                         <span>Capacity: <strong class="text-white">{{ $ruangan->kapasitas }} Seats</strong></span>
                     </div>
+                    @endif
+
+                    @if($ruangan->wifi_speed)
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-[#F7AD12]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.906 14.142 0M1.394 9.393c5.857-5.857 15.355-5.858 21.213 0" />
+                        </svg>
+                        <span>Wi-Fi: <strong class="text-white">{{ $ruangan->wifi_speed }}</strong></span>
+                    </div>
+                    @endif
+
+                    @if($ruangan->luas)
+                    <div class="flex items-center gap-2 text-gray-400">
+                        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
+                        <span>Area: <strong class="text-white">{{ $ruangan->luas }} m²</strong></span>
+                    </div>
+                    @endif
                 </div>
             </div>
 
             {{-- Right Image --}}
             <div class="relative h-64 md:h-80 rounded-2xl overflow-hidden border border-[#123B7A]/50 shadow-2xl">
-                {{-- Fallback image just to look nice --}}
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="{{ $ruangan->nama_ruangan }}" class="w-full h-full object-cover">
+                <img src="{{ $ruangan->gambar ? Storage::disk('public')->url($ruangan->gambar) : 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80' }}" alt="{{ $ruangan->nama_ruangan }}" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
         </div>
 
-        {{-- Facilities Section --}}
-        @if($ruangan->fasilitas && $ruangan->fasilitas->count() > 0)
-        <div class="bg-[#123B7A]/10 border border-[#123B7A]/30 rounded-2xl p-6 md:p-8 mb-16 backdrop-blur-sm">
-            <h3 class="text-xl font-bold text-white mb-6 uppercase tracking-wider">Facilities</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                @foreach($ruangan->fasilitas as $fasilitas)
-                <div class="flex items-center gap-3 bg-[#01031C]/50 border border-white/5 p-3 rounded-xl">
-                    <div class="w-8 h-8 rounded-lg bg-[#71A2CF]/10 flex items-center justify-center flex-shrink-0 text-[#71A2CF]">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-gray-300">{{ $fasilitas->nama_fasilitas }}</span>
-                </div>
-                @endforeach
+        {{-- Full Description Section --}}
+        @if($ruangan->deskripsi_panjang)
+        <div class="bg-[#123B7A]/10 border border-[#123B7A]/30 rounded-2xl p-6 md:p-8 mb-16 backdrop-blur-sm ProseMirror prose prose-invert max-w-none prose-p:text-gray-300 prose-headings:text-white prose-a:text-[#F7AD12]">
+            <h3 class="text-xl font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-6 h-6 text-[#71A2CF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Room Details
+            </h3>
+            <div class="text-gray-300 text-sm leading-relaxed">
+                {!! $ruangan->deskripsi_panjang !!}
             </div>
         </div>
         @endif
@@ -74,7 +89,7 @@
         <div class="bg-[#020636] border border-[#123B7A]/40 rounded-2xl overflow-hidden">
             <div class="px-6 py-5 border-b border-[#123B7A]/40 flex flex-wrap items-center justify-between gap-4">
                 <h3 class="text-xl font-bold text-white uppercase tracking-wider">Booking History</h3>
-                <a href="{{ route('peminjaman.create') }}" class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-4 py-2 rounded-full hover:brightness-110 transition-colors">
+                <a href="{{ route('peminjaman.create') }}" target="_blank" class="bg-[#F7AD12] text-[#01031C] text-xs font-bold px-4 py-2 rounded-full hover:brightness-110 transition-colors">
                     Book This Space
                 </a>
             </div>

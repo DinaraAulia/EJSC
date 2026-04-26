@@ -20,7 +20,7 @@ class PeminjamanResource extends Resource
     protected static ?string $slug = 'peminjaman';
 
 protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
-    protected static string|\UnitEnum|null $navigationGroup = 'Space & Facilities';
+    protected static string|\UnitEnum|null $navigationGroup = 'Space & Booking';
     protected static ?string $modelLabel = 'Room Booking';
     protected static ?string $pluralModelLabel = 'Room Bookings';
 

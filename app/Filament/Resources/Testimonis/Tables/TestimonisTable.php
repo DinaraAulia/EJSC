@@ -32,8 +32,7 @@ class TestimonisTable
                     ->date()
                     ->sortable()
                     ->label('Review Date'),
-                IconColumn::make('is_published')
-                    ->boolean()
+                \Filament\Tables\Columns\ToggleColumn::make('is_published')
                     ->label('Is Published'),
                 TextColumn::make('created_at')
                     ->dateTime()

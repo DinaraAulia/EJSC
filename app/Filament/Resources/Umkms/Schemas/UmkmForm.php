@@ -22,19 +22,20 @@ class UmkmForm
                         \Filament\Forms\Components\Select::make('city')
                             ->label('City/Region')
                             ->options([
-                                'Kabupaten Malang' => 'Kabupaten Malang',
-                                'Kota Malang' => 'Kota Malang',
-                                'Kota Batu' => 'Kota Batu',
-                                'Kabupaten Pasuruan' => 'Kabupaten Pasuruan',
-                                'Kota Pasuruan' => 'Kota Pasuruan',
-                                'Kabupaten Sidoarjo' => 'Kabupaten Sidoarjo',
-                                'Kabupaten Blitar' => 'Kabupaten Blitar',
-                                'Kota Blitar' => 'Kota Blitar',
-                                'Kota Surabaya' => 'Kota Surabaya',
+                                'Kabupaten Malang' => 'Malang Regency',
+                                'Kota Malang' => 'Malang City',
+                                'Kota Batu' => 'Batu City',
+                                'Kabupaten Pasuruan' => 'Pasuruan Regency',
+                                'Kota Pasuruan' => 'Pasuruan City',
+                                'Kabupaten Sidoarjo' => 'Sidoarjo Regency',
+                                'Kabupaten Blitar' => 'Blitar Regency',
+                                'Kota Blitar' => 'Blitar City',
+                                'Kota Surabaya' => 'Surabaya City',
                                 'Other' => 'Other (Type below)',
                             ])
                             ->required()
                             ->live()
+                            ->dehydrateStateUsing(fn ($state, $get) => $state === 'Other' ? $get('other_city') : $state)
                             ->afterStateHydrated(function ($set, $state) {
                                 $options = [
                                     'Kabupaten Malang', 'Kota Malang', 'Kota Batu',
@@ -60,7 +61,7 @@ class UmkmForm
                                     'Food' => 'Food',
                                     'Coffee Roastery' => 'Coffee Roastery',
                                     'Fashion' => 'Fashion',
-                                    'Kriya' => 'Kriya',
+                                    'Kriya' => 'Craft',
                                 ];
                                 
                                 // Get other categories from DB
@@ -70,6 +71,7 @@ class UmkmForm
                             })
                             ->required()
                             ->live()
+                            ->dehydrateStateUsing(fn ($state, $get) => $state === 'Other' ? $get('other_category') : $state)
                             ->afterStateHydrated(function ($set, $state) {
                                 $defaults = ['Food', 'Coffee Roastery', 'Fashion', 'Kriya'];
                                 if ($state && !in_array($state, $defaults)) {
@@ -83,6 +85,19 @@ class UmkmForm
                             ->visible(fn ($get) => $get('category') === 'Other')
                             ->required(fn ($get) => $get('category') === 'Other')
                             ->dehydrated(false),
+                    ])->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Contact & Social Media')
+                    ->schema([
+                        TextInput::make('phone')
+                            ->label('Business Phone Number')
+                            ->tel()
+                            ->placeholder('08xxxxxxxxxx'),
+                        TextInput::make('instagram')
+                            ->label('Instagram Link')
+                            ->url()
+                            ->placeholder('https://instagram.com/yourbusiness')
+                            ->helperText('Full URL to the Instagram profile'),
                     ])->columns(2),
 
                 \Filament\Schemas\Components\Section::make('UMKM Image')

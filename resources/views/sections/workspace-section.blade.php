@@ -13,7 +13,7 @@
         @foreach($ruangans as $ruangan)
             <a href="{{ route('workspace.show', $ruangan->slug) }}" class="group block cursor-pointer">
                 <div class="relative rounded-2xl overflow-hidden h-96 md:h-[420px]">
-                    <img src="{{ $ruangan->gambar ? asset('storage/' . $ruangan->gambar) : 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80' }}"
+                    <img src="{{ $ruangan->gambar ? \Illuminate\Support\Facades\Storage::disk('public')->url($ruangan->gambar) : 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80' }}"
                          alt="{{ $ruangan->nama_ruangan }}"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     {{-- Gradient overlay --}}

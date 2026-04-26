@@ -14,7 +14,7 @@
                 <p class="text-gray-400 text-sm leading-relaxed mb-5">
                     We explore every idea with curiosity and care, always looking for better ways to solve problems. Open minds for creative solutions within our collaborative workspace.
                 </p>
-                <a href="{{ route('pengunjung.create') }}" class="inline-flex items-center gap-4 bg-white/5 border border-white/10 rounded-full p-2 pr-6 hover:bg-white/10 transition-colors group">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSetuLm4-WwV6AMJEVmrjxPdE5XUeJOwdezKrS6XDHY1FrwDDw/viewform?fbzx=-7150895403706703302" target="_blank`" class="inline-flex items-center gap-4 bg-white/5 border border-white/10 rounded-full p-2 pr-6 hover:bg-white/10 transition-colors group">
                     <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#F7AD12] to-[#ec4848] flex items-center justify-center text-white group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.4)]">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
@@ -46,9 +46,9 @@
                     <div>
                         <h4 class="text-white font-semibold mb-4 text-sm">Follow Us</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Instagram</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">YouTube</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Gmail</a></li>
+                            <li><a href="https://www.instagram.com/ejscmalang/" target="_blank" class="text-gray-400 hover:text-white text-sm transition-colors">Instagram</a></li>
+                            <li><a href="https://www.youtube.com/@ejscmalang5657" target="_blank" class="text-gray-400 hover:text-white text-sm transition-colors">YouTube</a></li>
+                            <li><a href="mailto:ejscmalang@gmail.com" class="text-gray-400 hover:text-white text-sm transition-colors">Gmail</a></li>
                         </ul>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
         {{-- Bottom Bar --}}
         <div class="pt-8 mt-4 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <p class="text-gray-400 text-xs font-medium tracking-wide">All rights reserved @EJSCMalang</p>
+                <p class="text-gray-400 text-xs font-medium tracking-wide">All rights reserved 2026 @EJSCMalang</p>
             </div>
             <div class="flex items-center gap-6">
                 <a href="#" class="text-gray-400 hover:text-white text-xs transition-colors">Payment Policy</a>

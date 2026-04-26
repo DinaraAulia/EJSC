@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Talentas\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class TalentaForm
 {
@@ -20,19 +21,20 @@ class TalentaForm
                         \Filament\Forms\Components\Select::make('city')
                             ->label('City/Region')
                             ->options([
-                                'Kabupaten Malang' => 'Kabupaten Malang',
-                                'Kota Malang' => 'Kota Malang',
-                                'Kota Batu' => 'Kota Batu',
-                                'Kabupaten Pasuruan' => 'Kabupaten Pasuruan',
-                                'Kota Pasuruan' => 'Kota Pasuruan',
-                                'Kabupaten Sidoarjo' => 'Kabupaten Sidoarjo',
-                                'Kabupaten Blitar' => 'Kabupaten Blitar',
-                                'Kota Blitar' => 'Kota Blitar',
-                                'Kota Surabaya' => 'Kota Surabaya',
+                                'Kabupaten Malang' => 'Malang Regency',
+                                'Kota Malang' => 'Malang City',
+                                'Kota Batu' => 'Batu City',
+                                'Kabupaten Pasuruan' => 'Pasuruan Regency',
+                                'Kota Pasuruan' => 'Pasuruan City',
+                                'Kabupaten Sidoarjo' => 'Sidoarjo Regency',
+                                'Kabupaten Blitar' => 'Blitar Regency',
+                                'Kota Blitar' => 'Blitar City',
+                                'Kota Surabaya' => 'Surabaya City',
                                 'Other' => 'Other (Type below)',
                             ])
                             ->required()
                             ->live()
+                            ->dehydrateStateUsing(fn ($state, $get) => $state === 'Other' ? $get('other_city') : $state)
                             ->afterStateHydrated(function ($set, $state) {
                                 $options = [
                                     'Kabupaten Malang', 'Kota Malang', 'Kota Batu',
@@ -49,6 +51,54 @@ class TalentaForm
                             ->placeholder('e.g. Kabupaten Jombang')
                             ->visible(fn ($get) => $get('city') === 'Other')
                             ->required(fn ($get) => $get('city') === 'Other')
+                            ->dehydrated(false),
+                    ])->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Skill Category')
+                    ->schema([
+                        \Filament\Forms\Components\Select::make('skill')
+                            ->label('Expertise Category')
+                            ->options(function () {
+                                $defaults = [
+                                    'Anti Hacking Programming' => 'Anti Hacking Programming',
+                                    'Web Developer' => 'Web Developer',
+                                    'Event Organizer' => 'Event Organizer',
+                                    'Game Developer' => 'Game Developer',
+                                    'Mobile Apps Developer' => 'Mobile Apps Developer',
+                                    'Social Media Management' => 'Social Media Management',
+                                    'Video & Photography' => 'Video & Photography',
+                                    'Travel & Food Blogger' => 'Travel & Food Blogger',
+                                    'Digital Marketing' => 'Digital Marketing',
+                                    'Design & Branding Identity' => 'Design & Branding Identity',
+                                    'Content Creator' => 'Content Creator',
+                                    'Animation Developer' => 'Animation Developer',
+                                ];
+                                
+                                // Get extra categories from DB
+                                $dbCategories = \App\Models\Talenta::distinct()->whereNotNull('skill')->pluck('skill', 'skill')->toArray();
+                                
+                                return array_merge($defaults, $dbCategories, ['Other' => 'Other (Type below)']);
+                            })
+                            ->required()
+                            ->live()
+                            ->dehydrateStateUsing(fn ($state, $get) => $state === 'Other' ? $get('other_skill') : $state)
+                            ->afterStateHydrated(function ($set, $state) {
+                                $defaults = [
+                                    'Anti Hacking Programming', 'Web Developer', 'Event Organizer',
+                                    'Game Developer', 'Mobile Apps Developer', 'Social Media Management',
+                                    'Video & Photography', 'Travel & Food Blogger', 'Digital Marketing',
+                                    'Design & Branding Identity', 'Content Creator', 'Animation Developer'
+                                ];
+                                if ($state && !in_array($state, $defaults)) {
+                                    $set('skill', 'Other');
+                                    $set('other_skill', $state);
+                                }
+                            }),
+                        TextInput::make('other_skill')
+                            ->label('Specify Other Category')
+                            ->placeholder('e.g. Data Scientist')
+                            ->visible(fn ($get) => $get('skill') === 'Other')
+                            ->required(fn ($get) => $get('skill') === 'Other')
                             ->dehydrated(false),
                     ])->columns(2),
 
@@ -83,6 +133,8 @@ class TalentaForm
                             ->disk('public')
                             ->directory('talent-portfolios')
                             ->required()
+                            ->openable()
+                            ->downloadable()
                             ->columnSpanFull(),
                     ])->columns(1),
             ]);

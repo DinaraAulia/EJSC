@@ -55,7 +55,7 @@
             {{-- RIGHT: Image + Floating Card --}}
             <div class="relative">
                 <div class="relative rounded-2xl overflow-hidden h-64 md:h-[380px]">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+                    <img src="{{ asset('images/EJSC_Hero.jpeg') }}"
                          alt="EJSC Co-working Space"
                          class="w-full h-full object-cover"
                          loading="lazy">
@@ -136,10 +136,6 @@
                 <p class="text-gray-400 text-xs leading-relaxed">
                     No scheduled agenda yet. Please check back later.
                 </p>
-                <div class="mt-3 flex items-center justify-between">
-                    <span class="text-[#E3733D] text-xs font-medium">Upcoming Event</span>
-                    <span class="text-[#F7AD12] text-xs">13-01-2026</span>
-                </div>
                 @endforelse
 
                 <a href="{{ route('agenda.index') }}"
@@ -155,7 +151,7 @@
             <div class="bg-[#020636] border border-[#123B7A]/40 rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-4">
                     <p class="text-white font-semibold text-sm">Statistic Visitors</p>
-                    <a href="{{ route('pengunjung.create') }}"
+                    <a href="#"
                        class="bg-[#F7AD12] text-[#01031C] font-semibold px-3 py-1.5 rounded-full text-xs hover:brightness-110 transition-all flex items-center gap-1">
                         EXPLORE
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

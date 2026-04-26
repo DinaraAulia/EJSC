@@ -36,8 +36,8 @@
                 </div>
 
                 <div class="w-full md:w-36 bg-[#020636]/50 rounded-2xl p-4 border border-white/5 text-left md:text-right shrink-0">
-                    <p class="text-gray-400 text-xs mb-1">Total Dokumentasi</p>
-                    <p class="text-[#123B7A] text-xl md:text-2xl font-bold">{{ count($galeri->album_fotos ?? []) }} <span class="text-sm font-medium text-gray-300">Foto</span></p>
+                    <p class="text-gray-400 text-xs mb-1">Total Documentation</p>
+                    <p class="text-[#123B7A] text-xl md:text-2xl font-bold">{{ count($galeri->album_fotos ?? []) }} <span class="text-sm font-medium text-gray-300">Photos</span></p>
                 </div>
             </header>
 
@@ -58,24 +58,29 @@
         </h3>
 
         {{-- Photos Masonry Style Grid --}}
-        <div class="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-            @forelse($galeri->album_fotos ?? [] as $index => $path)
-                @php
-                    $isExternal = \Illuminate\Support\Str::startsWith($path, 'http');
-                    $imgSrc = $isExternal ? $path : asset('storage/' . $path);
-                @endphp
-                <div class="relative group rounded-xl overflow-hidden cursor-zoom-in break-inside-avoid border border-white/5 bg-[#020636] shadow-xl" onclick="openLightbox('{{ $imgSrc }}')">
-                    <img src="{{ $imgSrc }}" alt="Dokumentasi {{ $galeri->judul }}" loading="lazy" class="w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#01031C]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                        <span class="text-white/90 font-medium text-sm border-b border-[#F7AD12] pb-0.5 pointer-events-none">Perbesar Gambar</span>
+        @if(!empty($galeri->album_fotos))
+            <div class="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+                @foreach($galeri->album_fotos as $index => $path)
+                    @php
+                        $isExternal = \Illuminate\Support\Str::startsWith($path, 'http');
+                        $imgSrc = $isExternal ? $path : asset('storage/' . $path);
+                    @endphp
+                    <div class="relative group rounded-xl overflow-hidden cursor-zoom-in break-inside-avoid border border-white/5 bg-[#020636] shadow-xl" onclick="openLightbox('{{ $imgSrc }}')">
+                        <img src="{{ $imgSrc }}" alt="Dokumentasi {{ $galeri->judul }}" loading="lazy" class="w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#01031C]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
+                            <span class="text-white/90 font-medium text-sm border-b border-[#F7AD12] pb-0.5 pointer-events-none">Zoom Image</span>
+                        </div>
                     </div>
-                </div>
-            @empty
-                <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-10 bg-white/5 rounded-2xl border border-white/10">
-                    <p class="text-gray-400">Belum ada foto dokumentasi di dalam galeri ini.</p>
-                </div>
-            @endforelse
-        </div>
+                @endforeach
+            </div>
+        @else
+            <div class="w-full text-center py-20 bg-white/5 rounded-3xl border border-white/10">
+                <svg class="mx-auto w-12 h-12 text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <p class="text-gray-400 font-medium">No documentation photos available in this gallery yet.</p>
+            </div>
+        @endif
     </section>
 
     {{-- Lightbox Modal --}}

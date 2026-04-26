@@ -28,11 +28,13 @@ class RuanganForm
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
                         \Filament\Forms\Components\FileUpload::make('gambar')
-                            ->label('Image')
+                            ->label('Room Image')
                             ->image()
                             ->directory('ruangan-images')
                             ->disk('public')
-                            ->visibility('public'),
+                            ->visibility('public')
+                            ->openable()
+                            ->downloadable(),
                     ])->columns(2),
                     
                 \Filament\Schemas\Components\Section::make('Room Details')

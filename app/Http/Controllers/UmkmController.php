@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 
 class UmkmController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $umkms = \App\Models\Umkm::latest()->paginate(12);
+        $search = $request->input('search');
 
-        return view('pages.umkm', compact('umkms'));
+        $umkms = \App\Models\Umkm::when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                      ->orWhere('city', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('pages.umkm', compact('umkms', 'search'));
     }
 }

@@ -19,9 +19,15 @@ class AchievementsTable
                     ->searchable(),
                 TextColumn::make('year')
                     ->searchable(),
-                TextColumn::make('issuer')
+                TextColumn::make('category')
                     ->searchable(),
-                ImageColumn::make('image'),
+                TextColumn::make('image')
+                    ->label('Certificate')
+                    ->formatStateUsing(fn () => 'View PDF')
+                    ->url(fn ($record) => asset('storage/' . $record->image))
+                    ->openUrlInNewTab()
+                    ->color('primary')
+                    ->icon('heroicon-o-document-text'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

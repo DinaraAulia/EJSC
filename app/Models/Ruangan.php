@@ -48,18 +48,7 @@ class Ruangan extends Model
         'tgl_diperbarui' => 'date',
     ];
 
-    /**
-     * Ruangan ini memiliki banyak fasilitas.
-     */
-    public function fasilitas()
-    {
-        return $this->belongsToMany(
-            Fasilitas::class,
-            'ruangan_fasilitas',
-            'ruangan_id',
-            'fasilitas_id'
-        );
-    }
+
 
     /**
      * Ruangan ini memiliki banyak riwayat peminjaman.

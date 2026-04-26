@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use App\Models\Galeri;
-use App\Models\Partner;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
@@ -16,14 +15,12 @@ class LandingController extends Controller
                            ->orderBy('tanggal', 'asc')
                            ->get();
         $galeris   = Galeri::latest()->get();
-        $partners  = Partner::all();
-        $testimonis = Testimoni::where('is_published', true)->take(5)->get();
+        $testimonis = Testimoni::where('is_published', true)->latest()->take(6)->get();
         $ruangans  = \App\Models\Ruangan::where('is_tersedia', true)->get();
 
         return view('pages.home', compact(
             'agendas',
             'galeris',
-            'partners',
             'testimonis',
             'ruangans'
         ));

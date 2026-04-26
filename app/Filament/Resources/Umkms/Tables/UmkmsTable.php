@@ -22,6 +22,15 @@ class UmkmsTable
                 TextColumn::make('city')
                     ->searchable(),
                 ImageColumn::make('image'),
+                TextColumn::make('phone')
+                    ->label('Phone')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('instagram')
+                    ->label('Instagram')
+                    ->url(fn ($record) => $record->instagram)
+                    ->openUrlInNewTab()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
