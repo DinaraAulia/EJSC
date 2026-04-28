@@ -23,7 +23,7 @@
     <meta name="twitter:description" content="@yield('description', 'EJSC (East Java Super Corridor) Bakorwil Malang - Elevate Your Workspace. Co-working space modern, tempat kolaborasi, kreatif hub, dan fasilitas lengkap di Malang.')">
     <meta name="twitter:image" content="{{ asset('images/LogoEJSC.png') }}">
 
-    <link rel="icon" href="{{ asset('images/LogoEJSC.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/LogoEJSC.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
