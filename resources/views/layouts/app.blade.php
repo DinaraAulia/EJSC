@@ -11,6 +11,11 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', 'EJSC Bakorwil Malang - Co-working Space & Creative Hub')">
@@ -23,7 +28,6 @@
     <meta name="twitter:description" content="@yield('description', 'EJSC (East Java Super Corridor) Bakorwil Malang - Elevate Your Workspace. Co-working space modern, tempat kolaborasi, kreatif hub, dan fasilitas lengkap di Malang.')">
     <meta name="twitter:image" content="{{ asset('images/LogoEJSC.png') }}">
 
-    <link rel="icon" href="{{ asset('images/LogoEJSC.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
