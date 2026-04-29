@@ -45,6 +45,7 @@ services:
   db:
     image: mysql:8.0
     container_name: ejsc-db
+    user: "999:999"
     restart: always
     environment:
       # Variabel ini akan otomatis membuat database saat pertama kali dijalankan
