@@ -65,11 +65,31 @@ services:
       - ejsc-db-data:/var/lib/mysql
     networks:
       - ejsc-network
+      
+  db-backup:
+    image: mysql:8.0
+    container_name: ejsc-db-backup
+    restart: always
+    environment:
+      MYSQL_PWD: ${DB_PASSWORD:-}
+    volumes:
+      - ~/backups:/backups
+    entrypoint: |
+      sh -c 'while true; do
+        sleep 86400
+        mysqldump -h db -uroot ejsc_website > /backups/ejsc_$$(date +%Y%m%d_%H%M%S).sql
+        find /backups -name "*.sql" -mtime +7 -delete
+        echo "Backup done: $$(date)"
+      done'
+    depends_on:
+      - db
+    networks:
+      - ejsc-network
 
 networks:
   ejsc-network:
     driver: bridge
 
 volumes:
-  # Deklarasi volume agar data tersimpan permanen di storage Docker
   ejsc-db-data:
+    external: true

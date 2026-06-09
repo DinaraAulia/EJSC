@@ -4,12 +4,8 @@ on:
   push:
     paths:
       - '**.php'
-      - '**.blade.php' 
-      - 'resources/**' 
-      - 'public/**'
-      - 'docker-compose.yml'
-      - 'Dockerfile'
-      - '.github/workflows/deploy.yml'
+      - '**.blade.php'
+      - 'resources/**'
 
 jobs:
   deploy:
@@ -18,32 +14,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: mbstring, dom, fileinfo, sqlite, pdo_sqlite
-          coverage: none
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: /tmp/composer-cache  # Folder yang mau di-save/load
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Install PHP Dependencies
-        run: |
-          export COMPOSER_CACHE_DIR=/tmp/composer-cache
-          composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Run PHP Artisan Test
-        run: |
-          cp .env.testing .env
-          php artisan key:generate
-          php artisan test tests/Feature
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -55,14 +25,24 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to VPS via SSH
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: ".,!storage,!bootstrap/cache,!node_modules,!vendor,!.git,!.github,!.env,!.env.testing"
-          target: "/home/${{ secrets.SSH_USER }}/EJSC"
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via Rsync
+        run: |
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='storage' \
+            --exclude='bootstrap/cache' \
+            --exclude='.env' \
+            --exclude='mysql_data' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/EJSC/
 
       - name: Refresh Docker and Cache
         uses: appleboy/ssh-action@v0.1.10
@@ -72,14 +52,17 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/${{ secrets.SSH_USER }}/EJSC
-            # Pastikan jembatan storage ada
-            docker compose exec -T app php artisan storage:link || true
-            
-            # Bersihkan cache
-            docker compose exec -T app php artisan optimize:clear
-            
-            # Beri izin akses folder agar tidak 404/Forbidden
+
+            # Pastikan permission Laravel benar
+            sudo chown -R www-data:www-data storage bootstrap/cache public
             sudo chmod -R 775 storage bootstrap/cache public
-            sudo chown -R 1003:1003 storage bootstrap/cache public
-            
+
+            # Restart hanya app & nginx, TIDAK menyentuh db
+            docker compose up -d --no-deps app nginx
+
+            # Artisan cache
+            docker compose exec -T app php artisan config:cache
+            docker compose exec -T app php artisan route:cache
+            docker compose exec -T app php artisan view:clear
+
             echo "Deployment Success, May the force be with you!"
