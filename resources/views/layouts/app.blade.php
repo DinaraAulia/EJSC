@@ -30,17 +30,18 @@
 
     @stack('meta')
 
+    <!-- JSON-LD Structured Data untuk Local SEO -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "CoworkingSpace",
+      "@@context": "https://schema.org",
+      "@@type": "CoworkingSpace",
       "name": "EJSC Bakorwil Malang",
       "image": "{{ asset('images/LogoEJSC.png') }}",
-      "@id": "{{ url('/') }}",
+      "@@id": "{{ url('/') }}",
       "url": "{{ url('/') }}",
       "telephone": "",
       "address": {
-        "@type": "PostalAddress",
+        "@@type": "PostalAddress",
         "streetAddress": "Jl. Simpang Ijen No.2, Oro-oro Dowo, Kec. Klojen",
         "addressLocality": "Malang",
         "addressRegion": "Jawa Timur",
@@ -48,7 +49,7 @@
         "addressCountry": "ID"
       },
       "geo": {
-        "@type": "GeoCoordinates",
+        "@@type": "GeoCoordinates",
         "latitude": -7.9730,
         "longitude": 112.6214
       },
