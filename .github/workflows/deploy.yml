@@ -58,6 +58,9 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Install rsync
+        run: sudo apt-get install -y rsync
+
       - name: Deploy via Rsync
         run: |
           rsync -avz --delete \

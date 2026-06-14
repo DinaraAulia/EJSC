@@ -30,7 +30,6 @@
 
     @stack('meta')
 
-    <!-- JSON-LD Structured Data untuk Local SEO -->
     <script type="application/ld+json">
     {
       "@@context": "https://schema.org",
