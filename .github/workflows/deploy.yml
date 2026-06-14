@@ -1,19 +1,45 @@
 name: Continuous Deployment
-
 on:
   push:
     paths:
       - '**.php'
-      - '**.blade.php'
-      - 'resources/**'
+      - '**.blade.php' 
+      - 'resources/**' 
+      - 'public/**'
+      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install PHP Dependencies
+        run: |
+          export COMPOSER_CACHE_DIR=/tmp/composer-cache
+          composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP Artisan Test
+        run: |
+          cp .env.testing .env
+          php artisan key:generate
+          php artisan test tests/Feature
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -38,9 +64,11 @@ jobs:
             --exclude='.git' \
             --exclude='.github' \
             --exclude='node_modules' \
+            --exclude='vendor' \
             --exclude='storage' \
             --exclude='bootstrap/cache' \
             --exclude='.env' \
+            --exclude='.env.testing' \
             --exclude='mysql_data' \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/EJSC/
 
@@ -53,16 +81,17 @@ jobs:
           script: |
             cd /home/${{ secrets.SSH_USER }}/EJSC
 
-            # Pastikan permission Laravel benar
-            sudo chown -R www-data:www-data storage bootstrap/cache public
+            # Pastikan jembatan storage ada
+            docker compose exec -T app php artisan storage:link || true
+
+            # Bersihkan cache
+            docker compose exec -T app php artisan optimize:clear
+
+            # Beri izin akses folder
             sudo chmod -R 775 storage bootstrap/cache public
+            sudo chown -R 1003:1003 storage bootstrap/cache public
 
-            # Restart hanya app & nginx, TIDAK menyentuh db
+            # Restart hanya app & nginx, db tidak disentuh
             docker compose up -d --no-deps app nginx
-
-            # Artisan cache
-            docker compose exec -T app php artisan config:cache
-            docker compose exec -T app php artisan route:cache
-            docker compose exec -T app php artisan view:clear
 
             echo "Deployment Success, May the force be with you!"
