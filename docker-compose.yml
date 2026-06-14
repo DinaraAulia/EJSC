@@ -51,9 +51,7 @@ services:
       # Variabel ini akan otomatis membuat database saat pertama kali dijalankan
       MYSQL_DATABASE: ${DB_DATABASE:-ejsc_website}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-}
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-      - "3306:3306"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
     healthcheck:
       test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysql -h 127.0.0.1 -uroot -e 'SELECT 1' > /dev/null 2>&1"]
       interval: 5s

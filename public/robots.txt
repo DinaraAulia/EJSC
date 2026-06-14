@@ -19,6 +19,8 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+Sitemap: https://ejsc.my.id/sitemap.xml
+
 # Block bad bots
 User-agent: MJ12bot
 Disallow: /

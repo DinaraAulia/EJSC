@@ -28,6 +28,34 @@
     <meta name="twitter:description" content="@yield('description', 'EJSC (East Java Super Corridor) Bakorwil Malang - Elevate Your Workspace. Co-working space modern, tempat kolaborasi, kreatif hub, dan fasilitas lengkap di Malang.')">
     <meta name="twitter:image" content="{{ asset('images/LogoEJSC.png') }}">
 
+    @stack('meta')
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CoworkingSpace",
+      "name": "EJSC Bakorwil Malang",
+      "image": "{{ asset('images/LogoEJSC.png') }}",
+      "@id": "{{ url('/') }}",
+      "url": "{{ url('/') }}",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Simpang Ijen No.2, Oro-oro Dowo, Kec. Klojen",
+        "addressLocality": "Malang",
+        "addressRegion": "Jawa Timur",
+        "postalCode": "65119",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -7.9730,
+        "longitude": 112.6214
+      },
+      "description": "East Java Super Corridor (EJSC) Bakorwil Malang - Co-working space modern, tempat kolaborasi, kreatif hub, dan fasilitas lengkap untuk UMKM dan Talenta di Malang."
+    }
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
