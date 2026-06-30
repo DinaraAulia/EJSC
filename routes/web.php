@@ -33,3 +33,30 @@ Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
 Route::get('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
 Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::post('/peminjaman/check', [PeminjamanController::class, 'check'])->name('peminjaman.check');
+
+// Dynamic Sitemap
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        ['loc' => url('/'), 'lastmod' => now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '1.0'],
+        ['loc' => url('/talenta'), 'lastmod' => now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.9'],
+        ['loc' => url('/umkm'), 'lastmod' => now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.9'],
+        ['loc' => url('/achievement'), 'lastmod' => now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.8'],
+        ['loc' => url('/ruangan'), 'lastmod' => now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '0.9'],
+        ['loc' => url('/agenda'), 'lastmod' => now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '0.8'],
+        ['loc' => url('/peminjaman'), 'lastmod' => now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.7'],
+    ];
+
+    // Add workspace pages dynamically
+    $ruangans = \App\Models\Ruangan::where('is_tersedia', true)->get();
+    foreach ($ruangans as $ruangan) {
+        $urls[] = [
+            'loc' => url('/workspace/' . $ruangan->slug),
+            'lastmod' => $ruangan->updated_at ? $ruangan->updated_at->toDateString() : now()->toDateString(),
+            'changefreq' => 'monthly',
+            'priority' => '0.7',
+        ];
+    }
+
+    return response()->view('sitemap', compact('urls'))
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');

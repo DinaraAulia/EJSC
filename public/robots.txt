@@ -5,10 +5,11 @@ Disallow: /api/
 Disallow: /private/
 Disallow: /storage/
 Disallow: /vendor/
-Disallow: /*.json$
-Disallow: /*.xml$
 Disallow: /node_modules/
 Disallow: /.env
+
+# Allow sitemap to be crawled
+Allow: /sitemap.xml
 
 # Specific rules for major search engines
 User-agent: Googlebot
@@ -19,14 +20,8 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
-Sitemap: https://ejsc.my.id/sitemap.xml
-
 # Block bad bots
 User-agent: MJ12bot
 Disallow: /
 
-User-agent: AhrefsBot
-Disallow: /
-
-# Sitemap location
 Sitemap: https://ejsc.my.id/sitemap.xml
